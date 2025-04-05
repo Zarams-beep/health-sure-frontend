@@ -41,6 +41,7 @@ export default function BasicInfoEditSection({ onNext }: Props) {
   } = useForm<BasicInfo>({
     resolver: zodResolver(basicInfoSchema),
     mode: "onChange",
+    defaultValues,
   });
 
   // Watch form values

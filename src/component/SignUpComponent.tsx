@@ -23,7 +23,7 @@ const SignUp: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch,
+    // watch,
     setValue,
     trigger
   } = useForm<SignUpSubmitFormData>({
