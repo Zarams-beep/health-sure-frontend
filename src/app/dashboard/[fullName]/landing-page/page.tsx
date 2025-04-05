@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import BloodPressureChart from "@/component/BloodPressureChartPage";
-import AnatomyDiagram from "@/component/DashboardAnatomy";
+// import AnatomyDiagram from "@/component/DashboardAnatomy";
 import CardsSection from "@/component/DashboardCard";
 import DashboardLatestAppPage from "@/component/DashboardLatestAp";
 import DiagnosisResultSection from "@/component/DiagnosisResult";
@@ -19,7 +19,7 @@ export default function DashboardLandingPage() {
         <div className="dashboard-main-page-container">
             <CardsSection />
                 <div className="dashboard-main-page-container-2">
-                    <AnatomyDiagram />
+                    {/* <AnatomyDiagram /> */}
                     <div className="dashboard-main-page-container-3">
                         <div className="dashboard-main-page-container-4">
                             <div className="chart-selector">
