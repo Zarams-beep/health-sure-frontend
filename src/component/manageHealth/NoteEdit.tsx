@@ -62,7 +62,7 @@ export default function NoteEdit({ onNext, onBack }: Props) {
       <form onSubmit={handleSubmit(handleFormSubmit)} className="form-health-container-main">
         {/* Doctor Notes */}
         <div className="form-section">
-          <label>Doctor's Notes</label>
+          <label>Doctor&apos;s Notes</label>
           {doctorNotesArray.fields.map((item, index) => (
             <div key={item.id} className="note-input">
               <input type="text" {...register(`doctorNotes.${index}`)} placeholder="Enter doctor's note" />

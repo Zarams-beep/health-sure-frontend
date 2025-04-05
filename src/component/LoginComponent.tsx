@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CiMail, CiLock } from "react-icons/ci";
 import { FaEye, FaEyeSlash, FaRegCircle } from "react-icons/fa";
-import { RiMentalHealthFill, RiInformationLine } from "react-icons/ri";
+import { RiInformationLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "@/types/auth";
@@ -23,7 +23,6 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    trigger,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",

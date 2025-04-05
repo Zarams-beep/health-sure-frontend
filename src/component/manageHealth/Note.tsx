@@ -28,7 +28,7 @@ export default function NoteView() {
           {/* Doctor Notes Section */}
           {storedNotes.doctorNotes.length > 0 && (
             <div className="view-section">
-              <h3>Doctor's Notes</h3>
+              <h3>Doctor&apos;s Notes</h3>
               <ul>
                 {storedNotes.doctorNotes.map((note, index) => (
                   <li key={index} className="note-item">{note}</li>

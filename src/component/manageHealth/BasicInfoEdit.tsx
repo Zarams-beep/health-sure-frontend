@@ -69,7 +69,7 @@ export default function BasicInfoEditSection({ onNext }: Props) {
     setIsLoading(true);
     dispatch(setBasicInfo(data));
     setIsLoading(false);
-    onNext(); // Move to the next step
+    onNext(); 
   };
 
   return (

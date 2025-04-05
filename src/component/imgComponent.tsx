@@ -5,24 +5,20 @@ import Image from "next/image";
 import { FaPen, FaTrash } from "react-icons/fa";
 
 interface ImageUploaderProps {
-  onImageUpload: (file: File | null) => void; // Now sends a File object
+  onImageUpload: (file: File | null) => void;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null); // For preview
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null); // Store actual file
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
-
-        // Generate preview URL
         const previewURL = URL.createObjectURL(file);
         setSelectedImage(previewURL);
-        setUploadedFile(file);
-
-        // Pass the File object to the parent
+        
+        // Directly pass the file to parent without storing it in state
         onImageUpload(file);
       }
     },
@@ -37,7 +33,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
 
   const handleDelete = () => {
     setSelectedImage(null);
-    setUploadedFile(null);
     onImageUpload(null); // Notify parent that image is deleted
   };
 
