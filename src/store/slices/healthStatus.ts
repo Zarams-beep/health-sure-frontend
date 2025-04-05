@@ -2,15 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HealthStatus } from "@/types/healthSure";
 
 const initialState: HealthStatus = {
-    healthCondition: null,
+    healthCondition: '', 
     vitalSigns: {
-        bloodPressure: null,
-        heartRate: null,
-        temperature: null,
-        sugar: null,
-        oxygen: null,
-        cholesterol: null,
-        BMI: null,
+        bloodPressure: 0, 
+        heartRate: 0,
+        temperature: 0,
+        sugar: 0,
+        oxygen: 0,
+        cholesterol: 0,
+        BMI: 0,
     },
     allergies: [],
 };

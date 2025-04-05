@@ -2,20 +2,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BasicInfo } from "@/types/basicInfo";
 
 const initialState: BasicInfo = {
-    // id: null,
-    fullName:null,
-    DOB: null,
-    Age: null,
-    Gender: null,
-    phoneNumber: null,
-    email: null,
-    HouseAddress: null,
-    EmergencyNumber: null,
-    NextOfKinName: null,
-    NextOfKinGender: null,
-    NextOfKinPhoneNumber: null,
-    NextOfKinEmailAddress: null,
-};
+    fullName: '',
+    DOB: '',
+    Age: '0', 
+    Gender: 'Male', 
+    phoneNumber: '',
+    email: '',
+    HouseAddress: '',
+    EmergencyNumber: '',
+    NextOfKinName: '',
+    NextOfKinGender: 'Male',
+    NextOfKinPhoneNumber: '',
+    NextOfKinEmailAddress: ''
+  };
 
 const basicInfo = createSlice({
     name: "basicInfo",
