@@ -753,7 +753,9 @@
 }
 /* nav bar styling ends */
 /* side bar styling starts */
+/* media side bar styling starts */
 
+/* media side bar styling ends */
 .dashboard-main-container {
   @apply flex items-start relative top-0 bottom-0;
 }
@@ -776,7 +778,10 @@
 .sidebar .side-menu-list {
   @apply flex flex-col gap-10 text-[15px];
 }
-.sidebar ul li div {
+.sidebar2 .side-menu-list {
+  @apply flex flex-row bg-[green] gap-10 text-[15px] w-full;
+}
+.sidebar ul li div, .sidebar2 ul li div {
   @apply flex items-center gap-2 hover:cursor-pointer;
 }
 .side-menu-tab.active-tab,.side-menu-tab:hover {
@@ -788,8 +793,11 @@
 .sidebar .dropdown-menu {
   @apply mt-2 flex flex-col gap-2 text-[13px];
 }
-.sidebar .media-side-bar-icons {
-  @apply flex flex-col mt-8 gap-5;
+.sidebar2 .dropdown-menu {
+  @apply mt-2 flex flex-row gap-2 text-[13px];
+}
+.sidebar2 .media-side-bar-icons {
+  @apply flex flex-row w-full mt-8 gap-5 bg-[red];
 }
 /* side bar styling ends */
 

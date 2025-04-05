@@ -39,7 +39,7 @@ const Login: React.FC = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch("http://localhost:5000/auth/log-in", {
+      const response = await fetch("https://health-sure-backend.onrender.com/auth/log-in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

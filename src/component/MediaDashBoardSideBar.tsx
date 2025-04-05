@@ -80,8 +80,8 @@ const MobileSidebar = () => {
       ];
 
   return (
-    <aside className={`${styles.sidebar} sidebar`}>
-      <div className={styles.sidebar2}>
+    <aside className={`${styles.mediaSideBar} sidebar2`}>
+      <div className={styles.mediaSideBar2}>
         <h2><GiHealthCapsule /></h2>
 
         <nav>
