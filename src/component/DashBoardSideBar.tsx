@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { GiHealthCapsule } from "react-icons/gi";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { GrTransaction } from "react-icons/gr";

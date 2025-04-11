@@ -65,7 +65,8 @@ export default function BasicInfoEditSection({ onNext }: Props) {
       ...defaultValues,
     };
     setIsModified(JSON.stringify(formValues) !== JSON.stringify(initialValues));
-  }, [formValues]);
+  }, [formValues, defaultValues]);
+  
 
   
   const onSubmit = async (data: BasicInfo) => {

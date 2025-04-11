@@ -6,8 +6,6 @@ import Link from "next/link";
 import { BasicInfo } from "@/types/basicInfo";
 export default function BasicInfoSectionView() {
   const storedBasicInfo = useSelector((state: RootState) => state.basicInfo);
-  const fullName =
-  useSelector((state: RootState) => state.auth.fullName);
   const storedId = useSelector((state: RootState) => state.auth.id);
   const [basicInfo, setBasicInfo] = useState<BasicInfo>({
     fullName: "",
