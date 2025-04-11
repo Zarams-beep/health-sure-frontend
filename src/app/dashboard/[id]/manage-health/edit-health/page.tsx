@@ -17,7 +17,7 @@ export default function EditHealthPage() {
   const handleNext = (isValid: boolean = true) => {
     if (isValid) setActiveStep((prevStep) => prevStep + 1);
   };
-
+ 
   const handleBack = () => {
     setActiveStep((prevStep) => Math.max(0, prevStep - 1));
   };

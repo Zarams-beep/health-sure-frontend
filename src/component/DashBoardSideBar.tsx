@@ -20,27 +20,17 @@ const DashboardSideBarPage = () => {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [isHealthOpen, setIsHealthOpen] = useState(false);
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
-  const storedFullName = useSelector((state: RootState) => state.auth.fullName);
-  
-  // Ensure fullName is only used on the client
-  const [fullName, setFullName] = useState("Chizaram");
-
-  useEffect(() => {
-    if (storedFullName) {
-      setFullName(storedFullName);
-    }
-  }, [storedFullName]);
-
+  const storedId = useSelector((state: RootState) => state.auth.id);
   const menuItems = [
-    { name: "Landing Page", path: `/dashboard/${fullName}/landing-page`, icon: <RiDashboardHorizontalFill /> },
-    { name: "Payment", path: `/dashboard/${fullName}/payment`, icon: <MdOutlinePayment /> },
-    { name: "Transaction", path: `/dashboard/${fullName}/transaction-history`, icon: <GrTransaction /> },
+    { name: "Landing Page", path: `/dashboard/${storedId}/landing-page`, icon: <RiDashboardHorizontalFill /> },
+    { name: "Payment", path: `/dashboard/${storedId}/payment`, icon: <MdOutlinePayment /> },
+    { name: "Transaction", path: `/dashboard/${storedId}/transaction-history`, icon: <GrTransaction /> },
     {
       name: "Manage Health",
       icon: <MdOutlineHealthAndSafety />,
       subItems: [
-        { name: "View Health", path: `/dashboard/${fullName}/manage-health/view-health`, icon: <GrView /> },
-        { name: "Edit Health", path: `/dashboard/${fullName}/manage-health/edit-health`, icon: <GrFormEdit /> },
+        { name: "View Health", path: `/dashboard/${storedId}/manage-health/view-health`, icon: <GrView /> },
+        { name: "Edit Health", path: `/dashboard/${storedId}/manage-health/edit-health`, icon: <GrFormEdit /> },
       ],
       isOpen: isHealthOpen,
       toggle: () => setIsHealthOpen(!isHealthOpen),
@@ -49,14 +39,14 @@ const DashboardSideBarPage = () => {
       name: "Book Appointment",
       icon: <BsBookmarkHeartFill />,
       subItems: [
-        { name: "Meet Doctor", path: `/dashboard/${fullName}/landing-page/book-appointment/meet-doctor`, icon: <FaUserDoctor /> },
-        { name: "Visit Hospital", path: `/dashboard/${fullName}/landing-page/book-appointment/visit-hospital`, icon: <CiHospital1 /> },
-        { name: "Appointment History", path: `/dashboard/${fullName}/landing-page/book-appointment/appointment-history`, icon: <FaHospitalUser /> },
+        { name: "Meet Doctor", path: `/dashboard/${storedId}/landing-page/book-appointment/meet-doctor`, icon: <FaUserDoctor /> },
+        { name: "Visit Hospital", path: `/dashboard/${storedId}/landing-page/book-appointment/visit-hospital`, icon: <CiHospital1 /> },
+        { name: "Appointment History", path: `/dashboard/${storedId}/landing-page/book-appointment/appointment-history`, icon: <FaHospitalUser /> },
       ],
       isOpen: isAppointmentOpen,
       toggle: () => setIsAppointmentOpen(!isAppointmentOpen),
     },
-    { name: "Messages", path: `/dashboard/${fullName}/landing-page/messages`, icon: <IoIosChatbubbles /> },
+    { name: "Messages", path: `/dashboard/${storedId}/landing-page/messages`, icon: <IoIosChatbubbles /> },
   ];
 
   return (

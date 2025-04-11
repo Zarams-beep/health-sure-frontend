@@ -11,12 +11,12 @@ import { SignUpSubmitFormData } from "@/types/auth";
 // import { SignUpFormData } from "@/types/auth";
 import { signUpSchema } from "@/features/SignUpSchema";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { setUserData } from "@/store/slices/authSlices";
 import ImageUploader from "./imgComponent";
 const SignUp: React.FC = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
@@ -63,9 +63,9 @@ const SignUp: React.FC = () => {
         throw new Error(result.message || "Signup failed");
       }
 
-      dispatch(
-        setUserData({ fullName: data.fullName, image: result.imageUrl || null })
-      );
+      // dispatch(
+      //   setUserData({ fullName: data.fullName, image: result.imageUrl || null, email:data.email })
+      // );
       setTimeout(() => {
         alert("Signup successful!");
         router.push("/auth/log-in");

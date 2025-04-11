@@ -11,8 +11,7 @@ export default function NoteView() {
     caregiverComments: [],
   };
 
-  // Get full name from Redux
-  const fullName = useSelector((state: RootState) => state.auth.fullName) || "Chizaram";
+  const storedId = useSelector((state: RootState) => state.auth.id);
 
   // Check if any notes exist
   const isInfoAvailable = [storedNotes.doctorNotes, storedNotes.caregiverComments].some(
@@ -52,7 +51,7 @@ export default function NoteView() {
       ) : (
         <div className="missing-info">
           <p>No notes have been added yet.</p>
-          <Link href={`/dashboard/${fullName}/manage-health/edit-health`} className="info-link">
+          <Link href={`/dashboard/${storedId}/manage-health/edit-health`} className="info-link">
             Click here to add notes
           </Link>
         </div>

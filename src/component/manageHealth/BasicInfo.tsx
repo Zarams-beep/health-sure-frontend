@@ -6,7 +6,9 @@ import Link from "next/link";
 import { BasicInfo } from "@/types/basicInfo";
 export default function BasicInfoSectionView() {
   const storedBasicInfo = useSelector((state: RootState) => state.basicInfo);
-
+  const fullName =
+  useSelector((state: RootState) => state.auth.fullName);
+  const storedId = useSelector((state: RootState) => state.auth.id);
   const [basicInfo, setBasicInfo] = useState<BasicInfo>({
     fullName: "",
     DOB: "",
@@ -101,7 +103,7 @@ export default function BasicInfoSectionView() {
       ) : (
         <div className="missing-info">
           <p>You haven&apos;t added your basic information yet.</p>
-          <Link href={`/dashboard/${basicInfo.fullName}/manage-health/edit-health`}className="info-link">
+          <Link href={`/dashboard/${storedId}/manage-health/edit-health`}className="info-link">
             Click here to fill in your details
           </Link>
         </div>

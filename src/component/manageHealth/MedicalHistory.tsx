@@ -9,8 +9,7 @@ export default function MedicalHistoryView() {
   const storedMedicalHistory = useSelector(
     (state: RootState) => state.medicalHistory
   );
-  const fullName =
-    useSelector((state: RootState) => state.auth.fullName) || "Chizaram";
+  const storedId = useSelector((state: RootState) => state.auth.id);
   const [medicalHistory, setMedicalHistory] = useState<MedicalHistory>({
     pastDiagnoses: [],
     surgeries: [],
@@ -82,7 +81,7 @@ export default function MedicalHistoryView() {
         <div className="missing-info">
           <p>You haven&apos;t added your medical history yet.</p>
           <Link
-            href={`/dashboard/${fullName}/manage-health/edit-health`}
+            href={`/dashboard/${storedId}/manage-health/edit-health`}
             className="info-link"
           >
             Click here to fill in your details

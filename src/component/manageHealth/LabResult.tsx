@@ -7,8 +7,7 @@ import Link from "next/link"; // Import Link if needed
 
 export default function LabResultsView() {
   const storedLabResults = useSelector((state: RootState) => state.labResults);
-  const fullName =
-    useSelector((state: RootState) => state.auth.fullName) || "Chizaram";
+  const storedId = useSelector((state: RootState) => state.auth.id);
   const [labResultDetails, setLabResultsDetails] = useState<LabResults>({
     testResults: [],
     medicalReports: [],
@@ -75,7 +74,7 @@ export default function LabResultsView() {
         <div className="missing-info">
           <p>You haven&apos;t added your lab results yet.</p>
           <Link
-            href={`/dashboard/${fullName}/manage-health/edit-health`}
+            href={`/dashboard/${storedId}/manage-health/edit-health`}
             className="info-link"
           >
             Click here to fill in your details

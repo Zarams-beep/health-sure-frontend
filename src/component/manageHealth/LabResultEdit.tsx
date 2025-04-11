@@ -7,7 +7,8 @@ import { LabResults } from "@/types/labResult";
 import { labResultsSchema } from "@/features/labResult";
 import { setLabResults } from "@/store/slices/labResults";
 import { Button, Box, CircularProgress } from "@mui/material";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 interface Props {
   onNext: (isValid?: boolean) => void;
   onBack: () => void;
@@ -45,15 +46,35 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
     console.log("Default Values:", defaultValues);
     setIsModified(JSON.stringify(formValues) !== JSON.stringify(defaultValues));
   }, [formValues]);
-  
+ const { token,id } = useSelector((state: RootState) => state.auth);
+  const userId = id;
 
-  const handleFormSubmit = (data: LabResults) => {
+  const handleFormSubmit = async (data: LabResults) => {
     setIsLoading(true);
+
+    try {
+      const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/health-status`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to save data");
+      }
+  
     dispatch(setLabResults(data));
-    setTimeout(() => {
+    onNext();}
+    catch (error) {
+      alert(error instanceof Error ? error.message : "Something went wrong");
+      console.error("Submission error:", error);
+    } finally {
       setIsLoading(false);
-      onNext(true);
-    }, 1000);
+    }
   };
 
   return (

@@ -7,71 +7,100 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BasicInfo } from "@/types/basicInfo";
 import { basicInfoSchema } from "@/features/basicInfoSchema";
 import { Button, Box, CircularProgress } from "@mui/material";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 interface Props {
   onNext: () => void;
 }
 
-const defaultValues: BasicInfo = {
-  fullName: "",
-  DOB: "",
-  Age: "",
-  Gender: "Male", 
-  phoneNumber: "",
-  email: "",
-  HouseAddress: "",
-  EmergencyNumber: "",
-  NextOfKinName: "",
-  NextOfKinGender: "Male", 
-  NextOfKinPhoneNumber: "",
-  NextOfKinEmailAddress: "",
-};
 
 
 export default function BasicInfoEditSection({ onNext }: Props) {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [isModified, setIsModified] = useState(false);
-  const dispatch = useDispatch();
+
+  const { fullName, email, token,id } = useSelector((state: RootState) => state.auth);
+  const displayName = fullName || "Guest";
+  const displayEmail = email || "noemail@example.com";
+  // const decodedToken = token;
+  const userId = id;
+
+  const defaultValues: BasicInfo = {
+    fullName: displayName,
+    DOB: "",
+    Age: "",
+    Gender: "Male",
+    phoneNumber: "",
+    email: displayEmail,
+    HouseAddress: "",
+    EmergencyNumber: "",
+    NextOfKinName: "",
+    NextOfKinGender: "Male",
+    NextOfKinPhoneNumber: "",
+    NextOfKinEmailAddress: "",
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     watch,
+    setValue,
   } = useForm<BasicInfo>({
     resolver: zodResolver(basicInfoSchema),
     mode: "onChange",
     defaultValues,
   });
 
-  // Watch form values
   const formValues = watch();
 
-  // Check if form is modified
+  useEffect(() => {
+    setValue("fullName", displayName);
+    setValue("email", displayEmail);
+  }, [displayName, displayEmail, setValue]);
+
   useEffect(() => {
     const initialValues = {
-      fullName: "",
-      DOB: "",
-      Age: "",
-      Gender: null,
-      phoneNumber: "",
-      email: "",
-      HouseAddress: "",
-      EmergencyNumber: "",
-      NextOfKinName: "",
-      NextOfKinGender: null,
-      NextOfKinPhoneNumber: "",
-      NextOfKinEmailAddress: "",
+      ...defaultValues,
     };
     setIsModified(JSON.stringify(formValues) !== JSON.stringify(initialValues));
   }, [formValues]);
 
-  const onSubmit = (data: BasicInfo) => {
+  
+  const onSubmit = async (data: BasicInfo) => {
     setIsLoading(true);
-    dispatch(setBasicInfo(data));
-    setIsLoading(false);
-    onNext(); 
+    console.log(`token here ${token}`);
+    console.log(`id here ${userId}`);
+    
+    
+  
+    try {
+      const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/basic-info`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: 'include', 
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to save data");
+      }
+  
+      dispatch(setBasicInfo(data));
+      onNext(); // Move to the next step
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Something went wrong");
+      console.error("Submission error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+  
 
   return (
     <div className="edit-basic-info">
@@ -81,7 +110,10 @@ export default function BasicInfoEditSection({ onNext }: Props) {
         {/* Full Name */}
         <div className="form-health-sub">
           <label>Full Name</label>
-          <input type="text" {...register("fullName")} placeholder="Kindly Enter Name"/>
+          <input  type="text" 
+  value={displayName} 
+  readOnly 
+  className="readonly-field"/>
           {errors.fullName && <p className="red-error" >{errors.fullName.message}</p>}
         </div>
 
@@ -121,7 +153,10 @@ export default function BasicInfoEditSection({ onNext }: Props) {
         {/* Email */}
         <div className="form-health-sub">
           <label>Email</label>
-          <input type="email" {...register("email")} />
+          <input type="email" 
+  value={displayEmail} 
+  readOnly 
+  className="readonly-field" />
           {errors.email && <p className="red-error" >{errors.email.message}</p>}
         </div>
 

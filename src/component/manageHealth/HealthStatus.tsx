@@ -7,8 +7,7 @@ import { HealthStatus } from "@/types/healthSure";
 
 export default function HealthStatusView() {
   const storedHealthStatus = useSelector((state: RootState) => state.healthStatus);
- const fullName =
-    useSelector((state: RootState) => state.auth.fullName) || "Chizaram";
+  const storedId = useSelector((state: RootState) => state.auth.id);
   const [healthStatus, setHealthStatus] = useState<HealthStatus>({
     healthCondition: "",
     vitalSigns: {
@@ -73,7 +72,7 @@ export default function HealthStatusView() {
         <div className="missing-info">
           <p>You haven&apos;t added your health information yet.</p>
           <Link
-            href={`/dashboard/${fullName}/manage-health/edit-health`}
+            href={`/dashboard/${storedId}/manage-health/edit-health`}
             className="info-link"
           >
             Click here to fill in your details

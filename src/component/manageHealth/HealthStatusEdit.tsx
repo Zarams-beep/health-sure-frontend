@@ -8,6 +8,8 @@ import { HealthStatus } from "@/types/healthSure";
 import { healthStatusSchema } from "@/features/healthStatus";
 import { Button, Box, CircularProgress } from "@mui/material";
 import { useFieldArray } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 interface Props {
   onNext: (isValid?: boolean) => void; 
   onBack: () => void;
@@ -59,14 +61,39 @@ export default function HealthStatusEdit({ onNext, onBack }: Props) {
   useEffect(() => {
     setIsModified(JSON.stringify(formValues) !== JSON.stringify(defaultValues));
   }, [formValues]);
+    const { token,id } = useSelector((state: RootState) => state.auth);
+  const userId = id;
+// Form submission logic
+const handleFormSubmit = async (data: HealthStatus) => {
+  setIsLoading(true);
 
-  // Form submission logic
-  const handleFormSubmit = (data: HealthStatus) => {
-    setIsLoading(true);
+  try {
+    const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/health-status`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, 
+      },
+      credentials: 'include', 
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to save data");
+    }
+
     dispatch(setHealthStatus(data));
+    onNext();
+    
+  } catch (error) {
+    alert(error instanceof Error ? error.message : "Something went wrong");
+    console.error("Submission error:", error);
+  } finally {
     setIsLoading(false);
-    onNext(); // Move to the next step
-  };
+  }
+};
+
 
   // ✅ Fix: Explicitly define the fields to avoid TS2345 error
   const vitalSignFields: { label: string; name: keyof HealthStatus["vitalSigns"] }[] = [

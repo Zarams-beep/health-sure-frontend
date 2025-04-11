@@ -13,8 +13,9 @@ export default function DashboardNavBarPage() {
 
   const displayName = fullName || "Guest";
   const profileImage = image 
-  ? `http://localhost:5000${image}` 
+  ? `https://health-sure-backend.onrender.com${image}` 
   : "/img-5.jpg";
+
 
   const handleNotificationClick = () => {
     setNotification((prev) => !prev);

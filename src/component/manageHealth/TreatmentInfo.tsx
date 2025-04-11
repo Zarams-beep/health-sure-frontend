@@ -7,7 +7,7 @@ import { TreatmentInfo } from "@/types/treatmentInfo";
 
 export default function TreatmentInfoView() {
     const storedTreatmentInfo = useSelector((state: RootState) => state.treatmentInfo);
-    const fullName = useSelector((state: RootState) => state.auth.fullName)||"Chizaram";
+    const storedId = useSelector((state: RootState) => state.auth.id);
 
     const [treatmentInfo, setTreatmentInfo] = useState<TreatmentInfo>({
         assignedDoctor: {
@@ -71,7 +71,7 @@ export default function TreatmentInfoView() {
             ) : (
                  <div className="missing-info">
                             <p>No treatment information available.</p>
-                          <Link href={`/dashboard/${fullName}/manage-health/edit-health`}className="info-link">
+                          <Link href={`/dashboard/${storedId}/manage-health/edit-health`}className="info-link">
                             Click here to fill in your details
                           </Link>
                         </div>

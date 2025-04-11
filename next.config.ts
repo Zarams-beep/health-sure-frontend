@@ -5,17 +5,16 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '5000', // Your backend port
+        port: '5000', // For local development
         pathname: '/uploads/**',
       },
-      // Add this for production:
       {
         protocol: 'https',
-        hostname: 'your-production-domain.com',
+        hostname: 'health-sure-backend.onrender.com', // For production
         pathname: '/uploads/**',
       },
     ],
-    // Optional: For external image services
+    // Optional: For external image services like Wikipedia
     domains: ['upload.wikimedia.org'],
   },
 };

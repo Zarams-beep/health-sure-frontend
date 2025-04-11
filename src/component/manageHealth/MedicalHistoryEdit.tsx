@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MedicalHistory } from "@/types/medicalHistory";
 import { medicalHistorySchema } from "@/features/medicalHistorySchema";
 import { Button, Box, CircularProgress } from "@mui/material";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 interface Props {
   onNext: (isValid?: boolean) => void;
   onBack: () => void;
@@ -47,14 +48,35 @@ export default function MedicalHistoryEdit({ onNext, onBack }: Props) {
   useEffect(() => {
     setIsModified(JSON.stringify(formValues) !== JSON.stringify(defaultValues));
   }, [formValues]);
-
-  const handleFormSubmit = (data: MedicalHistory) => {
+ const { token,id } = useSelector((state: RootState) => state.auth);
+  const userId = id;
+  const handleFormSubmit = async (data: MedicalHistory) => {
     setIsLoading(true);
+
+  try {
+    const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/health-status`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, 
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to save data");
+    }
+
     dispatch(setMedicalHistory(data));
-    setTimeout(() => {
+    onNext();}
+    catch (error) {
+      alert(error instanceof Error ? error.message : "Something went wrong");
+      console.error("Submission error:", error);
+    } finally {
       setIsLoading(false);
-      onNext(true);
-    }, 1000);
+    }
+  
   };
 
   return (

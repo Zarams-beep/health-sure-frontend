@@ -36,12 +36,13 @@ const Login: React.FC = () => {
   const allFieldsFilled = email && password;
 
   const onSubmit = async (data: LoginFormData) => {
-    setIsLoading(true);
+    setIsLoading(true);    
     
     try {
       const response = await fetch("https://health-sure-backend.onrender.com/auth/log-in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include', 
         body: JSON.stringify(data)
       });
   
@@ -51,14 +52,17 @@ const Login: React.FC = () => {
       }
   
       const result = await response.json();
-  
+      console.log(`log in ${result.user.id}`);
+      console.log(`token here ${result.token}`);
       dispatch(setUserData({
         fullName: result.user.fullName,
-        image: result.user.image
-      }));
+        image: result.user.image,
+        email: result.user.email,
+      token:result.token,
+      id: result.user.id,
+      }));      
   
-      router.push(`/dashboard/${result.user.fullName}/landing-page`);
-      
+      router.push(`/dashboard/${result.user.id}/landing-page`);
     } catch (error) {
       alert(error instanceof Error ? error.message : "Login failed");
       console.error("Login error:", error);
