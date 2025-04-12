@@ -71,18 +71,14 @@ export default function BasicInfoEditSection({ onNext }: Props) {
   
   const onSubmit = async (data: BasicInfo) => {
     setIsLoading(true);
-    console.log(`token here ${token}`);
-    console.log(`id here ${userId}`);
-    
-    
-  
     try {
-      const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/basic-info`, {
+      const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/basic-info`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        mode: 'cors',
         credentials: 'include', 
         body: JSON.stringify(data),
       });
