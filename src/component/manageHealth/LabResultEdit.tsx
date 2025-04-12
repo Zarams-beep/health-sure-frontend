@@ -51,9 +51,9 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
 
   const handleFormSubmit = async (data: LabResults) => {
     setIsLoading(true);
-
+    // https://health-sure-backend.onrender.com/${userId}/manage-health/lab-results
     try {
-      const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/health-status`, {
+      const response = await fetch(``, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
