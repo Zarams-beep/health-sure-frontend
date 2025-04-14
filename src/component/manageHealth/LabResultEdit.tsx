@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LabResults } from "@/types/labResult";
+import { z } from "zod";
 import { labResultsSchema } from "@/features/labResult";
 import { setLabResults } from "@/store/slices/labResults";
 import { Button, Box, CircularProgress } from "@mui/material";
@@ -18,6 +18,8 @@ const defaultValues: LabResults = {
   testResults: [{ testName: "", result: "", date: "" }],
   medicalReports: [{ title: "", url: "" }],
 };
+// Infer the type from the schema
+type LabResults = z.infer<typeof labResultsSchema>;
 
 export default function LabResultsEdit({ onNext, onBack }: Props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,14 +53,16 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
 
   const handleFormSubmit = async (data: LabResults) => {
     setIsLoading(true);
-    // https://health-sure-backend.onrender.com/${userId}/manage-health/lab-results
+    
     try {
-      const response = await fetch(``, {
+      const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/lab-results`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, 
         },
+        mode: 'cors',
+        credentials: 'include', 
         body: JSON.stringify(data),
       });
   
@@ -122,7 +126,7 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
         {/* Navigation Buttons */}
         <Box mt={2} display="flex" justifyContent="space-between">
           <Button onClick={onBack} variant="outlined">Back</Button>
-          <Button type="submit" variant="contained" disabled={!isValid || !isModified || isLoading}>
+          <Button type="submit" variant="contained" disabled={isLoading}>
             {isLoading ? <CircularProgress size={20} /> : "Next"}
           </Button>
         </Box>

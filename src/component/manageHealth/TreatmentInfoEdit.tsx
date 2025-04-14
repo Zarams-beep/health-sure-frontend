@@ -49,14 +49,15 @@ export default function TreatmentInfoEdit({ onNext, onBack }: Props) {
   const handleFormSubmit = async (data: TreatmentInfo) => {
     setIsLoading(true);
 
-    // https://health-sure-backend.onrender.com/${userId}/manage-health/treatment-info
   try {
-    const response = await fetch(``, {
+    const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/treatment-info`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, 
       },
+      mode: 'cors',
+      credentials: 'include',
       body: JSON.stringify(data),
     });
 

@@ -1,11 +1,11 @@
 // Lab Results Type
 export interface LabResults {
-    testResults: {
+    testResults?: {
         testName: string;
         result: string;
         date: string;
     }[];
-    medicalReports: {
+    medicalReports?: {
         title: string;
         url: string; // Can store PDF links
     }[];

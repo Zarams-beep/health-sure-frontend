@@ -40,11 +40,11 @@
   font-family: "Roboto", sans-serif;
 }
 .header-section .header-part-1 .logo-icon {
-  @apply text-[45px] 1sm:text-[60px] text-brown;
+  @apply text-[30px] 1sm:text-[40px] text-brown;
 }
 
 .header-section .header-part-1 div h2 {
-  @apply text-[16px] base:text-[28px] leading-[22px] text-white-offWhite;
+  @apply text-[16px] base:text-[20px] leading-[22px] text-white-offWhite;
 }
 .header-section .header-part-1 div > h2:last-of-type {
   @apply text-brown;
@@ -85,7 +85,7 @@
   @apply flex items-center gap-5;
 }
 .header-section .header-part-3 button {
-  @apply w-[100px] p-2 rounded-[4px];
+  @apply w-[100px] p-2 rounded-[4px] text-[14px];
 }
 .header-section .header-part-3 .login-btn,
 .header-section .mini-header-part-3 .login-btn {
@@ -147,16 +147,16 @@
   font-family: "Manrope", sans-serif;
 }
 .hero-section .hero-section-1 {
-  @apply flex items-start lg:items-center justify-between lg:gap-0 gap-8 lg:flex-row flex-col w-full 2xl:gap-8;
+  @apply flex items-start lg:items-center gap-8 lg:flex-row flex-col w-full 2xl:gap-8;
 }
 .hero-section .hero-content {
   @apply w-full lg:w-[600px] 2xl:w-full flex flex-col gap-8;
 }
 .hero-section .hero-content h1 {
-  @apply text-[35px] xs:text-[50px] w-full 2xl:w-full base:w-[400px] font-bold leading-[56px];
+  @apply text-[25px] xs:text-[40px] w-full 2xl:w-full base:w-[400px] font-bold leading-[56px];
 }
 .hero-section .hero-content p {
-  @apply text-[16px] text-justify;
+  @apply text-[15px] text-justify;
 }
 .hero-section .hero-section-1 .hero-image {
   @apply w-full lg:w-[600px] 2xl:w-full;
@@ -200,11 +200,11 @@
   @apply flex flex-col items-center text-center mb-10;
 }
 .features-container header h2 {
-  @apply text-[35px] xs:text-[50px] font-bold leading-[56px] text-brown;
+  @apply text-[30px] xs:text-[40px] font-bold leading-[56px] text-brown;
   font-family: "Roboto", sans-serif;
 }
 .features-container header p {
-  @apply w-full md:w-[600px] text-[18px] text-brown-light leading-relaxed;
+  @apply w-full md:w-[600px] text-[15px] text-brown-light leading-relaxed;
   font-family: "Manrope", sans-serif;
 }
 .features-section {
@@ -244,7 +244,7 @@
 }
 
 .faq-title {
-  @apply text-[23px] xs:text-[28px] font-bold text-center text-brown mb-8;
+  @apply text-[16px] xs:text-[20px] font-bold text-center text-brown mb-8;
 }
 
 .faq-item {
@@ -252,11 +252,11 @@
 }
 
 .faq-question {
-  @apply flex justify-between items-center font-semibold text-[15px] xs:text-[20px];
+  @apply flex justify-between items-center font-semibold text-[14px] xs:text-[16px];
 }
 
 .faq-answer {
-  @apply mt-2 text-brown-light xs:text-[16px] text-[14px];
+  @apply mt-2 text-brown-light xs:text-[15px] text-[13px];
 }
 /* home page - FAQ styling ends */
 
@@ -269,11 +269,11 @@
   @apply flex flex-col items-center text-center mb-10;
 }
 .blog-title {
-  @apply text-[35px] xs:text-[50px] font-bold leading-[56px] text-brown text-center;
+  @apply text-[30px] xs:text-[40px] font-bold leading-[56px] text-brown text-center;
   font-family: "Roboto", sans-serif;
 }
 .blog-section header p {
-  @apply w-full md:w-[600px] text-[18px] text-brown-light leading-relaxed;
+  @apply w-full md:w-[600px] text-[16px] text-brown-light leading-relaxed;
   font-family: "Manrope", sans-serif;
 }
 .blog-list {
@@ -292,7 +292,7 @@
   font-family: "Roboto", sans-serif;
 }
 .blog-content h3 {
-  @apply text-[22px] font-bold mt-2;
+  @apply text-[18px] font-bold mt-2;
 }
 .blog-content p {
   @apply text-[14px];
@@ -301,7 +301,7 @@
   @apply my-2  flex items-center justify-center;
 }
 .blog-content .read-more-container a {
-  @apply text-brown bg-white-offWhite p-3 font-semibold xs:text-[16px] text-[14px] w-[100px] xs:w-[180px] rounded-[10px];
+  @apply text-brown bg-white-offWhite p-3 font-semibold xs:text-[15px] text-[13px] w-[100px] xs:w-[180px] rounded-[10px];
 }
 /* blog styling ends */
 
@@ -319,18 +319,18 @@
   @apply h-[700px] p-5 text-brown flex flex-col gap-8;
 }
 .talk-to-doctor-content h2 {
-  @apply font-bold text-[25px] xs:text-[40px] text-center;
+  @apply font-bold text-[20px] xs:text-[30px] text-center;
   font-family: "Roboto", sans-serif;
 }
 .talk-to-doctor-content p {
-  @apply text-[14px] xs:text-[17px] text-justify leading-relaxed;
+  @apply text-[14px] xs:text-[16px] text-justify leading-relaxed;
   font-family: "Manrope", sans-serif;
 }
 .talk-to-doctor-content .list-items {
   @apply flex flex-col gap-4;
 }
 .talk-to-doctor-content .list-items h3 {
-  @apply text-[17px] xs:text-[20px];
+  @apply text-[16px] xs:text-[18px];
   font-family: "Roboto", sans-serif;
 }
 .talk-to-doctor-content .list-items ul {
@@ -360,7 +360,7 @@
   @apply text-[red];
 }
 .landing-footer .input-footer-section {
-  @apply w-full lg:w-[800px] bg-white-offWhite px-5 py-3 h-[54px] flex items-start justify-between border border-brown-light rounded-[10px] 1sm:text-[16px] text-[14px];
+  @apply w-full lg:w-[800px] bg-white-offWhite px-5 py-3 h-[54px] flex items-start justify-between border border-brown-light rounded-[10px] 1sm:text-[15px] text-[13px];
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .landing-footer .input-footer-section input {
@@ -377,7 +377,7 @@
   @apply flex flex-col gap-1;
 }
 .footer-list .sub-list h3 {
-  @apply font-bold text-[16px] xs:text-[20px];
+  @apply font-bold text-[15px] xs:text-[18px];
   font-family: "Roboto", sans-serif;
 }
 .footer-list .sub-list ul {
@@ -390,7 +390,7 @@
   @apply w-full md:w-[500px] flex items-center justify-between;
 }
 .landing-footer .social-icons .footer-icon {
-  @apply text-[20px] xs:text-[30px];
+  @apply text-[18px] xs:text-[25px];
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 .landing-footer .copyright p {
@@ -410,11 +410,11 @@
   @apply flex flex-col text-blue;
 }
 .about-header .about-first-header h1 {
-  @apply text-[40px] lg:text-[50px] font-bold;
+  @apply text-[30px] lg:text-[40px] font-bold;
   font-family: "Roboto", sans-serif;
 }
 .about-header .about-first-header p {
-  @apply text-[18px];
+  @apply text-[16px];
   font-family: "Manrope", sans-serif;
 }
 .about-header .about-header-1-img {
@@ -427,7 +427,7 @@
   @apply w-full;
 }
 .pin-img {
-  @apply absolute text-[50px] top-[-1.4rem] text-brown-gold left-[45%];
+  @apply absolute text-[40px] top-[-1.4rem] text-brown-gold left-[45%];
 }
 .about-intro {
   @apply flex flex-col items-center text-brown-light text-center px-7 base:px-12 py-4 gap-7;
@@ -436,7 +436,7 @@
   @apply w-full md:w-[800px];
 }
 .about-intro h2 {
-  @apply text-[30px] md:text-[40px] font-bold;
+  @apply text-[20px] md:text-[30px] font-bold;
   font-family: "Roboto", sans-serif;
 }
 .about-intro p {
@@ -449,7 +449,7 @@
   @apply flex flex-col gap-3 text-brown-light w-full md:w-[700px];
 }
 .about-mission .about-mission-2 h2 {
-  @apply text-[30px] md:text-[40px] font-bold;
+  @apply text-[20px] md:text-[30px] font-bold;
   font-family: "Roboto", sans-serif;
 }
 .about-mission .about-mission-2 p {
@@ -469,12 +469,12 @@
 }
 .about-how-we-work h2,
 .about-team h2 {
-  @apply text-brown-light text-[30px] md:text-[40px] font-bold text-center;
+  @apply text-brown-light text-[20px] md:text-[30px] font-bold text-center;
   font-family: "Roboto", sans-serif;
 }
 .about-how-we-work p,
 .about-team p {
-  @apply text-brown-light w-full text-[15px] lg:text-[18px] text-center mb-10;
+  @apply text-brown-light w-full text-[14px] lg:text-[16px] text-center mb-10;
   font-family: "Roboto", sans-serif;
 }
 .about-team {
@@ -487,7 +487,7 @@
   @apply w-full md:w-[800px];
 }
 .about-team .team-member {
-  @apply flex items-center gap-[3rem];
+  @apply flex items-center gap-[3rem] lg:flex-row flex-col;
 }
 .for-team-img {
   @apply rounded-lg mb-4 w-full h-[250px] object-cover;
@@ -515,11 +515,11 @@
 
 /* contact us styling starts */
 .contactUs-form-section {
-  @apply bg-cover bg-center px-7 h-full w-full base:px-12 ;
+  @apply bg-cover bg-center px-7 h-full w-full base:px-12 py-5;
   background-image: url("/hero-img-2.jpg");
 }
 .contactUs-form-body {
-  @apply flex flex-col gap-9 bg-[#372d2593] text-milky p-8 rounded-[4rem] h-auto py-5;
+  @apply flex flex-col gap-9 bg-[#372d2593] text-milky p-8 rounded-[4rem] h-auto w-full ;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .contactUs-form-body .firstHeader {
@@ -527,30 +527,24 @@
 }
 .contactUs-form-body .firstHeader h2,
 .login-form-container .form-header .form-title {
-  @apply text-[30px] md:text-[40px] font-bold;
+  @apply text-[20px] md:text-[30px] font-bold;
   font-family: "Roboto", sans-serif;
 }
 .contactUs-form-body .firstHeader h6,
 .contactUs-body .contactUs-part-one p,
 .login-form-container .form-header p {
-  @apply text-[15px] tracking-wide;
+  @apply text-[13px] md:text-[15px] tracking-wide text-wrap;
   font-family: "Manrope", sans-serif;
 }
-.login-form-container .form-header p {
-  @apply text-[17px];
-}
 .contactUs-form-body .contactUs-body {
-  @apply flex items-start gap-10;
+  @apply flex items-start gap-10 w-full lg:flex-row flex-col-reverse;
 }
 .contactUs-body .contactUs-part-one {
-  @apply flex flex-col w-[900px] gap-7;
+  @apply flex flex-col w-full lg:w-[900px] gap-7;
 }
 .contactUs-body .contactUs-part-one h3 {
-  @apply font-bold text-[20px];
+  @apply font-bold text-[16px];
   font-family: "Roboto", sans-serif;
-}
-.contactUs-body .contactUs-part-one p {
-  @apply w-[400px];
 }
 .contactUs-body .contactUs-part-one .contactUs-socials {
   @apply flex items-center justify-between w-[150px] text-[20px];
@@ -587,7 +581,7 @@
   @apply flex flex-col gap-1;
 }
 .contactUs-subject label {
-  @apply text-[17px] font-normal;
+  @apply text-[16px] font-normal;
 }
 .contactUs-submit-container {
   @apply flex items-center justify-center;
@@ -662,7 +656,7 @@
   @apply flex flex-col gap-4;
 }
 .login-form .input-group label {
-  @apply text-[17px];
+  @apply text-[16px];
 }
 .login-form .input-wrapper input {
   @apply border-none bg-transparent 

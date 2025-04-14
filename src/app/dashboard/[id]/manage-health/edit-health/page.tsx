@@ -8,14 +8,24 @@ import MedicalHistoryEdit from "@/component/manageHealth/MedicalHistoryEdit";
 import TreatmentInfoEdit from "@/component/manageHealth/TreatmentInfoEdit";
 import LabResultsEdit from "@/component/manageHealth/LabResultEdit";
 import NoteEdit from "@/component/manageHealth/NoteEdit";
-
+import { useRouter } from "next/navigation";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 const steps = ["Basic Info", "Health Status", "Medical History", "Treatment Info", "Lab Result", "Notes"];
 
 export default function EditHealthPage() {
   const [activeStep, setActiveStep] = useState(0);
-
+  const router = useRouter();
+const storedId = useSelector((state: RootState) => state.auth.id);
   const handleNext = (isValid: boolean = true) => {
-    if (isValid) setActiveStep((prevStep) => prevStep + 1);
+    if (isValid) {
+      if (activeStep === steps.length - 1) {
+        // If we're on the last step (Notes), redirect to view page
+        router.push(`/dashboard/${storedId}/manage-health/view-health`); // Adjust this path to your view page
+      } else {
+        setActiveStep((prevStep) => prevStep + 1);
+      }
+    }
   };
  
   const handleBack = () => {
@@ -44,7 +54,6 @@ export default function EditHealthPage() {
           {activeStep === 3 && <TreatmentInfoEdit onNext={handleNext} onBack={handleBack} />}
           {activeStep === 4 && <LabResultsEdit onNext={handleNext} onBack={handleBack} />}
           {activeStep === 5 && <NoteEdit onNext={handleNext} onBack={handleBack} />}
-          
         </Box>
       </div>
     </div>

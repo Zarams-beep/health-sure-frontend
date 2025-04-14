@@ -52,14 +52,16 @@ export default function MedicalHistoryEdit({ onNext, onBack }: Props) {
   const userId = id;
   const handleFormSubmit = async (data: MedicalHistory) => {
     setIsLoading(true);
-    // https://health-sure-backend.onrender.com/${userId}/manage-health/medical-history
+    
   try {
-    const response = await fetch(``, {
+    const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/medical-history`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, 
       },
+      mode: 'cors',
+      credentials: 'include',
       body: JSON.stringify(data),
     });
 

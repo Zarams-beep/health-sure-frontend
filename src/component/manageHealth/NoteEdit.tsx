@@ -33,7 +33,7 @@ export default function NoteEdit({ onNext, onBack }: Props) {
   } = useForm<Notes>({
     resolver: zodResolver(notesSchema),
     mode: "onChange",
-    defaultValues: storedNotes || defaultValues,
+    defaultValues,
   });
 
   const doctorNotesArray = useFieldArray({ control, name: "doctorNotes"as unknown as never, });
@@ -51,12 +51,14 @@ export default function NoteEdit({ onNext, onBack }: Props) {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`https://health-sure-backend.onrender.com/${userId}/manage-health/notes`, {
+      const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/notes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, 
         },
+        mode: 'cors',
+      credentials: 'include',
         body: JSON.stringify(data),
       });
   
@@ -79,41 +81,52 @@ export default function NoteEdit({ onNext, onBack }: Props) {
       <h2>Edit Notes</h2>
 
       <form onSubmit={handleSubmit(handleFormSubmit)} className="form-health-container-main">
+        <div className="form-health-container-2">
         {/* Doctor Notes */}
-        <div className="form-section">
+
+        <div className="form-health-sub">
           <label>Doctor&apos;s Notes</label>
+          <div className="main-medication-container">
           {doctorNotesArray.fields.map((item, index) => (
-            <div key={item.id} className="note-input">
+            <div key={item.id} className="medication-container">
               <input type="text" {...register(`doctorNotes.${index}`)} placeholder="Enter doctor's note" />
-              <button onClick={() => doctorNotesArray.remove(index)} disabled={doctorNotesArray.fields.length === 1}>
+              <div className="add-allergy-btn-container">
+              <button className="btn-med" onClick={() => doctorNotesArray.remove(index)} disabled={doctorNotesArray.fields.length === 1}>
                 Remove
-              </button>
+              </button></div>
             </div>
-          ))}
-          <button onClick={() => doctorNotesArray.append("")}>Add Note</button>
+          ))}</div>
+
+<div className="add-allergy-btn-container">
+          <button onClick={() => doctorNotesArray.append("")}>Add Note</button></div>
           {errors.doctorNotes && <p className="error">{errors.doctorNotes.message}</p>}
         </div>
 
         {/* Caregiver Comments */}
-        <div className="form-section">
+        <div className="form-health-sub">
           <label>Caregiver Comments</label>
+          <div className="main-medication-container">
           {caregiverCommentsArray.fields.map((item, index) => (
-            <div key={item.id} className="note-input">
+            <div key={item.id} className="medication-container">
               <input type="text" {...register(`caregiverComments.${index}`)} placeholder="Enter caregiver comment" />
+              <div className="add-allergy-btn-container">
               <button onClick={() => caregiverCommentsArray.remove(index)} disabled={caregiverCommentsArray.fields.length === 1}>
                 Remove
-              </button>
+              </button></div>
             </div>
-          ))}
-          <button onClick={() => caregiverCommentsArray.append("")}>Add Comment</button>
+          ))}</div>
+
+<div className="add-allergy-btn-container">
+          <button onClick={() => caregiverCommentsArray.append("")}>Add Comment</button></div>
           {errors.caregiverComments && <p className="error">{errors.caregiverComments.message}</p>}
+        </div>
         </div>
 
         {/* Navigation Buttons */}
         <Box mt={2} display="flex" justifyContent="space-between">
           <Button onClick={onBack} variant="outlined">Back</Button>
           <Button type="submit" variant="contained" disabled={!isValid || !isModified || isLoading}>
-            {isLoading ? <CircularProgress size={20} /> : "Save"}
+            {isLoading ? <CircularProgress size={20} /> : "Finish"}
           </Button>
         </Box>
       </form>
