@@ -11,7 +11,8 @@ export default function NoteView() {
     caregiverComments: [],
   };
 
-  const storedId = useSelector((state: RootState) => state.auth.id);
+   const { token, id } = useSelector((state: RootState) => state.auth);
+    const userId = id;
 
   // Check if any notes exist
   const isInfoAvailable = [storedNotes.doctorNotes, storedNotes.caregiverComments].some(
@@ -51,7 +52,7 @@ export default function NoteView() {
       ) : (
         <div className="missing-info">
           <p>No notes have been added yet.</p>
-          <Link href={`/dashboard/${storedId}/manage-health/edit-health`} className="info-link">
+          <Link href={`/dashboard/${userId}/manage-health/edit-health`} className="info-link">
             Click here to add notes
           </Link>
         </div>

@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['sidebar','auth','basicInfo','healthStatus','medicalHistory','treatmentInfo','labResults','notes'],// Add other reducers here if you want to persist them
+  whitelist: ['sidebar','auth'],// Add other reducers here if you want to persist them
 };
 
 // Create persisted reducer

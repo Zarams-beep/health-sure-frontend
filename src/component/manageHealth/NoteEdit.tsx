@@ -90,6 +90,7 @@ export default function NoteEdit({ onNext, onBack }: Props) {
           {doctorNotesArray.fields.map((item, index) => (
             <div key={item.id} className="medication-container">
               <input type="text" {...register(`doctorNotes.${index}`)} placeholder="Enter doctor's note" />
+
               <div className="add-allergy-btn-container">
               <button className="btn-med" onClick={() => doctorNotesArray.remove(index)} disabled={doctorNotesArray.fields.length === 1}>
                 Remove
@@ -98,7 +99,7 @@ export default function NoteEdit({ onNext, onBack }: Props) {
           ))}</div>
 
 <div className="add-allergy-btn-container">
-          <button onClick={() => doctorNotesArray.append("")}>Add Note</button></div>
+          <button className="add-allergy-btn" onClick={() => doctorNotesArray.append("")}>Add Note</button></div>
           {errors.doctorNotes && <p className="error">{errors.doctorNotes.message}</p>}
         </div>
 
@@ -110,14 +111,14 @@ export default function NoteEdit({ onNext, onBack }: Props) {
             <div key={item.id} className="medication-container">
               <input type="text" {...register(`caregiverComments.${index}`)} placeholder="Enter caregiver comment" />
               <div className="add-allergy-btn-container">
-              <button onClick={() => caregiverCommentsArray.remove(index)} disabled={caregiverCommentsArray.fields.length === 1}>
+              <button className="btn-med" onClick={() => caregiverCommentsArray.remove(index)} disabled={caregiverCommentsArray.fields.length === 1}>
                 Remove
               </button></div>
             </div>
           ))}</div>
 
 <div className="add-allergy-btn-container">
-          <button onClick={() => caregiverCommentsArray.append("")}>Add Comment</button></div>
+          <button className="add-allergy-btn" onClick={() => caregiverCommentsArray.append("")}>Add Comment</button></div>
           {errors.caregiverComments && <p className="error">{errors.caregiverComments.message}</p>}
         </div>
         </div>

@@ -950,7 +950,7 @@
 
 /* wallet styling starts */
 .main-wallet-container{
-  @apply flex items-start justify-between w-full px-10  h-full gap-4 relative my-4
+  @apply flex items-start justify-between w-full px-10  h-full gap-4 relative my-4;
 }
 .wallet-container{
   @apply flex flex-col gap-6 w-full h-full pr-6;

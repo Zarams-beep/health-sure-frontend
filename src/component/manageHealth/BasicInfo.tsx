@@ -4,9 +4,12 @@ import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { BasicInfo } from "@/types/basicInfo";
+import { CircularProgress } from "@mui/material";
+
 export default function BasicInfoSectionView() {
   const storedBasicInfo = useSelector((state: RootState) => state.basicInfo);
-  const storedId = useSelector((state: RootState) => state.auth.id);
+  const { id: userId, token } = useSelector((state: RootState) => state.auth);
+
   const [basicInfo, setBasicInfo] = useState<BasicInfo>({
     fullName: "",
     DOB: "",
@@ -22,86 +25,93 @@ export default function BasicInfoSectionView() {
     NextOfKinEmailAddress: "",
   });
 
-  useEffect(() => {
-    if (storedBasicInfo) {
-      setBasicInfo({
-        fullName: storedBasicInfo.fullName ?? "Chizaram",
-        DOB: storedBasicInfo.DOB ?? "",
-        Age: storedBasicInfo.Age ?? "",
-        Gender: storedBasicInfo.Gender ?? "Male",
-        phoneNumber: storedBasicInfo.phoneNumber ?? "",
-        email: storedBasicInfo.email ?? "",
-        HouseAddress: storedBasicInfo.HouseAddress ?? "",
-        EmergencyNumber: storedBasicInfo.EmergencyNumber ?? "",
-        NextOfKinName: storedBasicInfo.NextOfKinName ?? "",
-        NextOfKinGender: storedBasicInfo.NextOfKinGender ?? "Male",
-        NextOfKinPhoneNumber: storedBasicInfo.NextOfKinPhoneNumber ?? "",
-        NextOfKinEmailAddress: storedBasicInfo.NextOfKinEmailAddress ?? "",
-      });
-    }
-  }, [storedBasicInfo]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Check if any required field is missing
+  useEffect(() => {
+    console.log(userId);
+    
+    const fetchBasicInfo = async () => {
+      try {
+        // Use Redux first
+        if (storedBasicInfo && storedBasicInfo.fullName) {
+          setBasicInfo(storedBasicInfo);
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(
+          `https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/basic-info`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch basic info: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const backendData = data.data || data;
+
+        if (!backendData.fullName) {
+          throw new Error("Incomplete basic info from server.");
+        }
+
+        setBasicInfo(backendData);
+      } catch (err) {
+        console.error("Error fetching basic info:", err);
+        setError(err instanceof Error ? err.message : "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBasicInfo();
+  }, [userId, token]);
+
   const isInfoAvailable = Object.values(basicInfo).every((value) => value);
 
-  
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <CircularProgress />
+        <p>Loading basic info...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Error: {error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
+  }
+
   return (
     <div className="basic-info-container">
       {isInfoAvailable ? (
         <>
-          <div className="info-item">
-            <h4>Full Name:</h4>
-            <p>{basicInfo.fullName}</p>
-          </div>
-          <div className="info-item">
-            <h4>Date of Birth:</h4>
-            <p>{basicInfo.DOB}</p>
-          </div>
-          <div className="info-item">
-            <h4>Age:</h4>
-            <p>{basicInfo.Age}</p>
-          </div>
-          <div className="info-item">
-            <h4>Gender:</h4>
-            <p>{basicInfo.Gender}</p>
-          </div>
-          <div className="info-item">
-            <h4>Phone Number:</h4>
-            <p>{basicInfo.phoneNumber}</p>
-          </div>
-          <div className="info-item">
-            <h4>Email:</h4>
-            <p>{basicInfo.email}</p>
-          </div>
-          <div className="info-item">
-            <h4>House Address:</h4>
-            <p>{basicInfo.HouseAddress}</p>
-          </div>
-          <div className="info-item">
-            <h4>Emergency Number:</h4>
-            <p>{basicInfo.EmergencyNumber}</p>
-          </div>
-          <div className="info-item">
-            <h4>Next of Kin Name:</h4>
-            <p>{basicInfo.NextOfKinName}</p>
-          </div>
-          <div className="info-item">
-            <h4>Next of Kin Gender:</h4>
-            <p>{basicInfo.NextOfKinGender}</p>
-          </div>
-          <div className="info-item">
-            <h4>Next of Kin Phone Number:</h4>
-            <p>{basicInfo.NextOfKinPhoneNumber}</p>
-          </div>
-          <div className="info-item">
-            <h4>Next of Kin Email Address:</h4>
-            <p>{basicInfo.NextOfKinEmailAddress}</p>
-          </div>
+          {Object.entries(basicInfo).map(([key, value]) => (
+            <div className="info-item" key={key}>
+              <h4>{key.replace(/([A-Z])/g, " $1")}</h4>
+              <p>{value}</p>
+            </div>
+          ))}
         </>
       ) : (
         <div className="missing-info">
           <p>You haven&apos;t added your basic information yet.</p>
-          <Link href={`/dashboard/${storedId}/manage-health/edit-health`}className="info-link">
+          <Link
+            href={`/dashboard/${userId}/manage-health/edit-health`}
+            className="info-link"
+          >
             Click here to fill in your details
           </Link>
         </div>
