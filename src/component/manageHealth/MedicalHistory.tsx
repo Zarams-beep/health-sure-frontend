@@ -4,12 +4,13 @@ import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { MedicalHistory } from "@/types/medicalHistory";
-
+import { CircularProgress } from "@mui/material";
+import { setMedicalHistory } from "@/store/slices/medicalHistory";
 export default function MedicalHistoryView() {
   const storedMedicalHistory = useSelector(
     (state: RootState) => state.medicalHistory
   );
-  const storedId = useSelector((state: RootState) => state.auth.id);
+  const { id: userId, token } = useSelector((state: RootState) => state.auth);
   const [medicalHistory, setMedicalHistory] = useState<MedicalHistory>({
     pastDiagnoses: [],
     surgeries: [],
@@ -17,23 +18,69 @@ export default function MedicalHistoryView() {
     familyHistory: [],
   });
 
-  useEffect(() => {
-    if (storedMedicalHistory) {
-      setMedicalHistory({
-        pastDiagnoses: storedMedicalHistory.pastDiagnoses ?? [],
-        surgeries: storedMedicalHistory.surgeries ?? [],
-        medications: storedMedicalHistory.medications ?? [],
-        familyHistory: storedMedicalHistory.familyHistory ?? [],
-      });
-    }
-  }, [storedMedicalHistory]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Check if any required field is missing
-  const isInfoAvailable =
-    medicalHistory.pastDiagnoses.length > 0 ||
-    medicalHistory.surgeries.length > 0 ||
-    medicalHistory.medications.length > 0 ||
-    medicalHistory.familyHistory.length > 0;
+  useEffect(() => {
+    console.log(userId);
+    const fetchMedicalHealthInfo = async () => {
+      try {
+        if (storedMedicalHistory){
+          setMedicalHistory(storedMedicalHistory);
+          setLoading(false);
+          return;
+        }
+        const response = await fetch(
+          `https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/medical-history`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        if (!response.ok) {
+          throw new Error(`Failed to fetch medical history: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const backendData = data.data || data;
+
+        if (!backendData) {
+          throw new Error("Incomplete medical health info from server.");
+        }
+        setMedicalHistory(backendData);}
+        catch (err) {
+          console.error("Error fetching medical health info:", err);
+          setError(err instanceof Error ? err.message : "Unknown error");
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchMedicalHealthInfo();
+    }, [userId, token]);
+
+    const isInfoAvailable = Object.values(medicalHistory).every((value) => value);
+
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <CircularProgress />
+          <p>Loading medical health info...</p>
+        </div>
+      );
+    }
+  
+    if (error) {
+      return (
+        <div className="error-container">
+          <p>Error: {error}</p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      );
+    }
+  
 
   return (
     <div className="medical-history-container">
@@ -81,7 +128,7 @@ export default function MedicalHistoryView() {
         <div className="missing-info">
           <p>You haven&apos;t added your medical history yet.</p>
           <Link
-            href={`/dashboard/${storedId}/manage-health/edit-health`}
+            href={`/dashboard/${userId}/manage-health/edit-health`}
             className="info-link"
           >
             Click here to fill in your details

@@ -1199,9 +1199,7 @@
 
 /* manage health styling starts */
 /* basic info styling starts */
-.view-main-container{
-  @apply grid grid-cols-2 gap-y-8 p-4 mt-3 text-brown
-}
+
 .edit-basic-info{
   @apply rounded-[10px] p-4 border border-brown-grey flex flex-col gap-7 text-brown;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -1274,3 +1272,28 @@
   @apply text-[#5252c9]
 }
 /* manage health styling ends */
+
+/* manage health styling view starts */
+.view-main-container{
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 p-4 mt-3 text-brown
+}
+.basic-info-container, .health-status-container{
+  @apply shadow-lg rounded-md py-4 px-7
+}
+.info-item{
+  @apply flex items-center gap-2 mb-1
+}
+.info-item h4{
+  @apply capitalize text-[16px] font-semibold
+}
+.pinned-section{
+  @apply flex flex-col gap-4
+}
+.pinned-section-2{
+  @apply relative flex items-center justify-center
+}
+.pin{
+  @apply absolute text-[25px] text-brown;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+/* manage health styling view ends */

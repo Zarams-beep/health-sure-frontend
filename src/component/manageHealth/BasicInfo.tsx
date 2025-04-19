@@ -98,12 +98,15 @@ export default function BasicInfoSectionView() {
     <div className="basic-info-container">
       {isInfoAvailable ? (
         <>
-          {Object.entries(basicInfo).map(([key, value]) => (
-            <div className="info-item" key={key}>
-              <h4>{key.replace(/([A-Z])/g, " $1")}</h4>
-              <p>{value}</p>
-            </div>
-          ))}
+          {Object.entries(basicInfo)
+  .filter(([key]) => key !== "id" && key !== "userId")
+  .map(([key, value]) => (
+    <div className="info-item" key={key}>
+      <h4>{key.replace(/([A-Z])/g, " $1")}:</h4>
+      <p>{value}</p>
+    </div>
+))}
+
         </>
       ) : (
         <div className="missing-info">
