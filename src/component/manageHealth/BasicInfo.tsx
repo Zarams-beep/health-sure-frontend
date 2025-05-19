@@ -29,9 +29,8 @@ export default function BasicInfoSectionView() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(userId);
-    
     const fetchBasicInfo = async () => {
+      
       try {
         // Use Redux first
         if (storedBasicInfo && storedBasicInfo.fullName) {
@@ -97,9 +96,15 @@ export default function BasicInfoSectionView() {
   return (
     <div className="basic-info-container">
       {isInfoAvailable ? (
-        <>
+        <div className="basic-info-container">
           {Object.entries(basicInfo)
-  .filter(([key]) => key !== "id" && key !== "userId")
+  .filter(
+    ([key]) =>
+      key !== "id" &&
+      key !== "userId" &&
+      key !== "createdAt" &&
+      key !== "updatedAt"
+  )
   .map(([key, value]) => (
     <div className="info-item" key={key}>
       <h4>{key.replace(/([A-Z])/g, " $1")}:</h4>
@@ -107,7 +112,7 @@ export default function BasicInfoSectionView() {
     </div>
 ))}
 
-        </>
+        </div>
       ) : (
         <div className="missing-info">
           <p>You haven&apos;t added your basic information yet.</p>

@@ -26,7 +26,6 @@ export default function ContactUsForm() {
   });
 
   const submitData = (data: ContactUsFormData) => {
-    console.log("Form submitted:", data);
     if (!allFieldsFilled || (isSubmitted && Object.keys(errors).length > 0)) {
       setLoading(false);
     } else {
@@ -75,12 +74,12 @@ export default function ContactUsForm() {
                   {/* Email */}
                   <div className="contactUs-details-small">
                     <MdOutlineMailOutline />
-                    <p>example@gmail.com</p>
+                    <p>support@healthsure.com</p>
                   </div>
                   {/* Location */}
                   <div className="contactUs-details-small">
                     <FaLocationDot />
-                    <p>Example Address Nigeria.</p>
+                    <p>healthsure, Plot 200 Mountain West, Lagos State, Nigeria.</p>
                   </div>
                 </div>
 

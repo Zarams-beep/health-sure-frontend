@@ -10,7 +10,9 @@ export default function MedicalHistoryView() {
   const storedMedicalHistory = useSelector(
     (state: RootState) => state.medicalHistory
   );
+  
   const { id: userId, token } = useSelector((state: RootState) => state.auth);
+  
   const [medicalHistory, setMedicalHistory] = useState<MedicalHistory>({
     pastDiagnoses: [],
     surgeries: [],
@@ -22,10 +24,17 @@ export default function MedicalHistoryView() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(userId);
     const fetchMedicalHealthInfo = async () => {
       try {
-        if (storedMedicalHistory){
+        if  (
+          storedMedicalHistory &&
+          (
+            storedMedicalHistory.pastDiagnoses.length > 0 ||
+            storedMedicalHistory.surgeries.length > 0 ||
+            storedMedicalHistory.medications.length > 0 ||
+            storedMedicalHistory.familyHistory.length > 0
+          )
+        ) {
           setMedicalHistory(storedMedicalHistory);
           setLoading(false);
           return;
@@ -47,7 +56,7 @@ export default function MedicalHistoryView() {
         const data = await response.json();
         const backendData = data.data || data;
 
-        if (!backendData) {
+        if (!backendData.pastDiagnoses) {
           throw new Error("Incomplete medical health info from server.");
         }
         setMedicalHistory(backendData);}
@@ -83,9 +92,9 @@ export default function MedicalHistoryView() {
   
 
   return (
-    <div className="medical-history-container">
+    <div className="health-status-container">
       {isInfoAvailable ? (
-        <>
+        <div className="health-status-container">
           <div className="info-item">
             <h4>Past Diagnoses:</h4>
             <ul>
@@ -123,7 +132,7 @@ export default function MedicalHistoryView() {
               ))}
             </ul>
           </div>
-        </>
+        </div>
       ) : (
         <div className="missing-info">
           <p>You haven&apos;t added your medical history yet.</p>

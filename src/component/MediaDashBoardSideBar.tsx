@@ -61,14 +61,13 @@ const MobileSidebar = () => {
           name: "Book Appointment",
           icon: <BsBookmarkHeartFill />,
           subItems: [
-            { name: "Meet Doctor", path: `/dashboard/${storedId}/landing-page/book-appointment/meet-doctor`, icon: <FaUserDoctor /> },
-            { name: "Visit Hospital", path: `/dashboard/${storedId}/landing-page/book-appointment/visit-hospital`, icon: <CiHospital1 /> },
-            { name: "Appointment History", path: `/dashboard/${storedId}/landing-page/book-appointment/appointment-history`, icon: <FaHospitalUser /> },
+            { name: "Meet Doctor", path: `/dashboard/${storedId}/book-appointment/meet-doctor`, icon: <FaUserDoctor /> },
+            { name: "Appointment History", path: `/dashboard/${storedId}/book-appointment/appointment-history`, icon: <FaHospitalUser /> },
           ],
           isOpen: isAppointmentOpen,
           toggle: () => setIsAppointmentOpen(!isAppointmentOpen),
         },
-        { name: "Messages", path: `/dashboard/${storedId}/landing-page/messages`, icon: <IoIosChatbubbles /> },
+        { name: "Messages", path: `/dashboard/${storedId}/messages`, icon: <IoIosChatbubbles /> },
       ];
 
   return (

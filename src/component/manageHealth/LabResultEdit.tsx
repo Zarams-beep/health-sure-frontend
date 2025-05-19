@@ -41,16 +41,16 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
     defaultValues,
   });
 
-  const testResultsArray = useFieldArray({ 
-    control, 
-    name: "testResults" 
+  const testResultsArray = useFieldArray({
+    control,
+    name: "testResults",
   });
-  
-  const medicalReportsArray = useFieldArray({ 
-    control, 
-    name: "medicalReports" 
+
+  const medicalReportsArray = useFieldArray({
+    control,
+    name: "medicalReports",
   });
-  
+
   const formValues = watch();
 
   useEffect(() => {
@@ -59,24 +59,27 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
 
   const handleFormSubmit = async (data: LabResults) => {
     setIsLoading(true);
-    
+
     try {
-      const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/lab-results`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, 
-        },
-        mode: 'cors',
-        credentials: 'include', 
-        body: JSON.stringify(data),
-      });
-  
+      const response = await fetch(
+        `https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/lab-results`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          mode: "cors",
+          credentials: "include",
+          body: JSON.stringify(data),
+        }
+      );
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to save data");
       }
-  
+
       dispatch(setLabResults(data));
       onNext();
     } catch (error) {
@@ -91,7 +94,10 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
     <div className="edit-basic-info">
       <h2>Edit Lab Results</h2>
 
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="form-health-container-main">
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="form-health-container-main"
+      >
         <div className="form-health-container-2">
           {/* Test Results */}
           <div className="form-health-sub">
@@ -99,30 +105,31 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
             <div className="main-medication-container">
               {testResultsArray.fields.map((item, index) => (
                 <div key={item.id} className="medication-container">
-                    <input
+                  <input
                     key={item.id}
-                      {...register(`testResults.${index}.testName`)}
-                      placeholder="Enter test name or 'none'"
-                    />
+                    {...register(`testResults.${index}.testName`)}
+                    placeholder="Enter test name or 'none'"
+                  />
 
-                    <input
-                      {...register(`testResults.${index}.result`)}
-                      placeholder="Enter result or 'none'"
-                    />
+                  <input
+                    {...register(`testResults.${index}.result`)}
+                    placeholder="Enter result or 'none'"
+                  />
 
-                    <input
-                      type="date"
-                      {...register(`testResults.${index}.date`)}
-                    />
-                    <div className="add-allergy-btn-container">
+                  <input
+                    type="date"
+                    {...register(`testResults.${index}.date`)}
+                  />
+                  <div className="add-allergy-btn-container">
                     <button
                       type="button"
                       className="btn-med"
-                      onClick={() => testResultsArray.remove(index)} 
+                      onClick={() => testResultsArray.remove(index)}
                       disabled={testResultsArray.fields.length === 1}
                     >
                       Remove
-                    </button></div>
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -130,7 +137,13 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
               <button
                 type="button"
                 className="add-allergy-btn"
-                onClick={() => testResultsArray.append({ testName: "", result: "", date: "" })}
+                onClick={() =>
+                  testResultsArray.append({
+                    testName: "",
+                    result: "",
+                    date: "",
+                  })
+                }
               >
                 Add Test Result
               </button>
@@ -143,27 +156,28 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
             <div className="main-medication-container">
               {medicalReportsArray.fields.map((item, index) => (
                 <div key={item.id} className="medication-container">
-                    <input
-                      {...register(`medicalReports.${index}.title`)}
-                      placeholder="Enter title or 'none'"
-                     className="input-group"
-                    />
+                  <input
+                    {...register(`medicalReports.${index}.title`)}
+                    placeholder="Enter title or 'none'"
+                    className="input-group"
+                  />
 
-                    <input
-                      {...register(`medicalReports.${index}.url`)}
-                      placeholder="Enter URL or 'none'"
-                      className="input-group"
-                    />
+                  <input
+                    {...register(`medicalReports.${index}.url`)}
+                    placeholder="Enter URL or 'none'"
+                    className="input-group"
+                  />
 
-<div className="add-allergy-btn-container">
+                  <div className="add-allergy-btn-container">
                     <button
-                    className="btn-med"
+                      className="btn-med"
                       type="button"
-                      onClick={() => medicalReportsArray.remove(index)} 
+                      onClick={() => medicalReportsArray.remove(index)}
                       disabled={medicalReportsArray.fields.length === 1}
                     >
                       Remove
-                    </button></div>
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -171,7 +185,9 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
               <button
                 type="button"
                 className="add-allergy-btn"
-                onClick={() => medicalReportsArray.append({ title: "", url: "" })}
+                onClick={() =>
+                  medicalReportsArray.append({ title: "", url: "" })
+                }
               >
                 Add Medical Report
               </button>
@@ -181,14 +197,18 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
 
         {/* Navigation Buttons */}
         <Box mt={2} display="flex" justifyContent="space-between">
-         <Button onClick={onBack} variant="outlined" className="back-btn">Back</Button>
-                   <Button type="submit" variant="contained" disabled={!isValid || !isModified || isLoading}>
-                     {isLoading ? <CircularProgress size={20} /> : "Next"}
-                   </Button>
+          <Button onClick={onBack} variant="outlined" className="back-btn">
+            Back
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={!isValid || !isModified || isLoading}
+          >
+            {isLoading ? <CircularProgress size={20} /> : "Next"}
+          </Button>
         </Box>
       </form>
-
-   
     </div>
   );
 }

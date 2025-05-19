@@ -10,28 +10,31 @@ import TreatmentInfoView from "@/component/manageHealth/TreatmentInfo";
 import { MdNetworkPing } from "react-icons/md";
 
 export default function ViewHealthPage() {
-  const components = [
-    <BasicInfoSectionView key="basic" />,
-    <HealthStatusView key="status" />,
-    <MedicalHistoryView key="history" />,
-    <TreatmentInfoView key="treatment" />,
-    <LabResultsView key="lab" />,
-    <NoteView key="note" />,
+  const healthSections = [
+    { component: <BasicInfoSectionView />, title: "Basic Info" },
+    { component: <HealthStatusView />, title: "Health Status" },
+    { component: <MedicalHistoryView />, title: "Medical History" },
+    { component: <TreatmentInfoView />, title: "Treatment Info" },
+    { component: <LabResultsView />, title: "Lab Results" },
+    { component: <NoteView />, title: "Note" },
   ];
+  
 
   return (
     <div className="main-wallet-container">
       <div className="wallet-container">
         <BalanceMainSection />
         <div className="view-main-container">
-          {components.map((Component, index) => (
-            <div key={index} className="pinned-section">
-              <div className="pinned-section-2">
-                <MdNetworkPing className="pin"/>
-              </div>
-              {Component}
-            </div>
-          ))}
+        {healthSections.map(({ component, title }, index) => (
+  <div key={index} className="pinned-section">
+    <h2>{title}</h2>
+    <div className="pinned-section-2">
+      <MdNetworkPing className="pin" />
+    </div>
+    {component}
+  </div>
+))}
+
         </div>
       </div>
     </div>

@@ -98,19 +98,21 @@ export default function NoteView() {
   }
 
   return (
-    <div className="notes-container">
+    <div className="health-status-container">
       {isInfoAvailable ? (
-        <>
-          <h2>Notes</h2>
+        <div className="health-status-container treatment-flex-info">
 
           {/* Doctor Notes Section */}
           {noteDetails.doctorNotes.length > 0 && (
-            <div className="view-section">
-              <h3>Doctor&apos;s Notes</h3>
+            <div className="small-treatment-flex">
+              <h3>DOCTOR&apos;S NOTES</h3>
               <ul>
                 {noteDetails.doctorNotes.map((note, index) => (
                   <li key={index} className="note-item">
-                    {note}
+                   <div className="info-item">
+                    <h4>Doctor Notes:</h4>
+                    <p> {note}</p>
+                   </div>
                   </li>
                 ))}
               </ul>
@@ -119,18 +121,21 @@ export default function NoteView() {
 
           {/* Caregiver Comments Section */}
           {noteDetails.caregiverComments.length > 0 && (
-            <div className="view-section">
-              <h3>Caregiver Comments</h3>
+            <div className="small-treatment-flex">
+              <h3>CAREGIVER COMMENTS</h3>
               <ul>
                 {noteDetails.caregiverComments.map((comment, index) => (
                   <li key={index} className="comment-item">
-                    {comment}
+                  <div className="info-item">
+                  <h4>comment:</h4>
+                  <p> {comment}</p>
+                  </div>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-        </>
+        </div>
       ) : (
         <div className="missing-info">
           <p>No notes have been added yet.</p>

@@ -3,9 +3,9 @@ import { z } from "zod";
 
 export const treatmentInfoSchema = z.object({
     assignedDoctor: z.object({
-        name: z.string().nullable(),
-        specialization: z.string().nullable(),
-        contact: z.string().nullable(),
+        name: z.string(),
+        specialization: z.string(),
+        contact: z.string(),
     }),
     treatmentPlans: z.array(z.string().min(1, "Treatment plan cannot be empty")),
     upcomingAppointments: z.array(z.object({
