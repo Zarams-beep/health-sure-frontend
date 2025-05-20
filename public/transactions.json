@@ -48,7 +48,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/Opay.svg",
+        "bankPicture": "/OPay.svg",
         "bankName": "Opay",
         "accountNumber": "1000000004",
         "transactionType": "Debit",
@@ -144,7 +144,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/ecobank.jpeg",
+        "bankPicture": "/ecobank-seeklogo.png",
         "bankName": "EcoBank",
         "accountNumber": "1000000012",
         "transactionType": "Debit",
@@ -156,7 +156,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/ecobank.jpeg",
+        "bankPicture": "/ecobank-seeklogo.png",
         "bankName": "EcoBank",
         "accountNumber": "1000000013",
         "transactionType": "Credit",
@@ -168,7 +168,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/ecobank.jpeg",
+        "bankPicture": "/ecobank-seeklogo.png",
         "bankName": "EcoBank",
         "accountNumber": "1000000014",
         "transactionType": "Debit",
@@ -180,7 +180,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/ecobank.jpeg",
+        "bankPicture": "/ecobank-seeklogo.png",
         "bankName": "EcoBank",
         "accountNumber": "1000000015",
         "transactionType": "Credit",
@@ -192,7 +192,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/ecobank.jpeg",
+        "bankPicture": "/ecobank-seeklogo.png",
         "bankName": "EcoBank",
         "accountNumber": "1000000016",
         "transactionType": "Debit",
@@ -204,7 +204,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/Opay.svg",
+        "bankPicture": "/OPay.svg",
         "bankName": "Opay",
         "accountNumber": "1000000017",
         "transactionType": "Credit",
@@ -240,7 +240,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/Opay.svg",
+        "bankPicture": "/OPay.svg",
         "bankName": "Opay",
         "accountNumber": "1000000020",
         "transactionType": "Debit",
@@ -252,7 +252,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/Opay.svg",
+        "bankPicture": "/OPay.svg",
         "bankName": "Opay",
         "accountNumber": "1000000021",
         "transactionType": "Credit",
@@ -276,7 +276,7 @@
         "myAccountNumber": "0987654321"
     },
     {
-        "bankPicture": "/Opay.svg",
+        "bankPicture": "/OPay.svg",
         "bankName": "Opay",
         "accountNumber": "1000000023",
         "transactionType": "Credit",
