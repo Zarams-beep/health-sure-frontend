@@ -25,7 +25,7 @@ export default function ContactUsForm() {
     mode: "onSubmit",
   });
 
-  const submitData = (data: ContactUsFormData) => {
+  const submitData = () => {
     if (!allFieldsFilled || (isSubmitted && Object.keys(errors).length > 0)) {
       setLoading(false);
     } else {

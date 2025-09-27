@@ -13,8 +13,7 @@ import { departments, doctors } from "@/assets/meetDoctorAsset";
 export default function MeetDoctor() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const router = useRouter();
-
+  
   const {
     register,
     handleSubmit,

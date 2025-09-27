@@ -33,7 +33,7 @@ export default function LabResultsEdit({ onNext, onBack }: Props) {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { isValid },
     watch,
   } = useForm<LabResults>({
     resolver: zodResolver(labResultsSchema),

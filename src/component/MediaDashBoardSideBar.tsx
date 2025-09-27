@@ -8,7 +8,7 @@ import { GrTransaction, GrView, GrFormEdit } from "react-icons/gr";
 import { MdOutlinePayment, MdOutlineHealthAndSafety } from "react-icons/md";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import { FaUserDoctor, FaHospitalUser } from "react-icons/fa6";
-import { CiHospital1 } from "react-icons/ci";
+// import { CiHospital1 } from "react-icons/ci";
 import { IoIosChatbubbles } from "react-icons/io";
 import { GiHealthCapsule } from "react-icons/gi";
 import styles from "@/styles/SideBar.module.css";

@@ -9,7 +9,7 @@ import { MdOutlinePayment, MdOutlineHealthAndSafety } from "react-icons/md";
 import { GrView, GrFormEdit } from "react-icons/gr";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import { FaUserDoctor, FaHospitalUser } from "react-icons/fa6";
-import { CiHospital1 } from "react-icons/ci";
+// import { CiHospital1 } from "react-icons/ci";
 import { IoIosChatbubbles, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import styles from "@/styles/SideBar.module.css";
 import { RootState } from "@/store/store";
