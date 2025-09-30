@@ -25,7 +25,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function AboutTableSection() {
   return (
-    <section className="about-how-we-work">
+    <section className="about-how-we-work container">
       <div>
         <h2>How We Work</h2>
         <p>Our health-saving model ensures full transparency and security:</p>

@@ -7,6 +7,7 @@ export default function AboutPage() {
     <div className="about-page-container">
       {/* Page Header */}
       <header className="about-header">
+        <div className="container">
         <div className="about-first-header">
         <h1>About Health Sure</h1>
         </div>
@@ -14,10 +15,11 @@ export default function AboutPage() {
         <Image src="/img-6.jpg" alt="About us" width={400} height={250} quality={100} />
         <ImPushpin className="pin-img"/>
         </div>
+        </div>
       </header>
 
       {/* Introduction Section */}
-      <section className="about-intro">
+      <section className="about-intro container">
        <div className="">
        <h2>Why Choose Health Sure?</h2>
         <p>
@@ -32,7 +34,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="about-mission">
+      <section className="about-mission container">
       <div className="img-container">
         <Image src="/img-6.jpg" alt="About us" width={400} height={250} quality={100} />
         </div>
@@ -48,7 +50,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vison Section */}
-      <section className="about-mission">
+      <section className="about-mission container">
       <div className="about-mission-2">
        <h2>Our Vision</h2>
        <p>

@@ -392,22 +392,22 @@
 
 /* about us styling starts */
 .about-page-container {
-  @apply overflow-x-hidden text-white-offWhite w-full h-full flex flex-col gap-10;
-  font-family: "Manrope", sans-serif;
+  @apply overflow-x-hidden text-white-offWhite w-full h-full flex flex-col gap-10 font-alt;
 }
 .about-page-container .about-header {
-  @apply bg-lightGrey flex items-center justify-between px-7 base:px-12 py-10;
+  @apply bg-blue-light py-10;
+}
+.about-page-container .about-header .container{
+  @apply flex items-center justify-between
 }
 .about-header .about-first-header {
   @apply flex flex-col text-blue;
 }
 .about-header .about-first-header h1 {
-  @apply text-[30px] lg:text-[40px] font-bold;
-  font-family: "Roboto", sans-serif;
+  @apply text-[30px] lg:text-[40px] font-bold font-heading;
 }
 .about-header .about-first-header p {
-  @apply text-[16px];
-  font-family: "Manrope", sans-serif;
+  @apply text-[16px] font-alt;
 }
 .about-header .about-header-1-img {
   @apply bg-white-offWhite p-[10px] w-full md:w-[350px] border-[15px] border-solid border-r-brown border-b-brown border-t-[#615245] 
@@ -419,33 +419,31 @@
   @apply w-full;
 }
 .pin-img {
-  @apply absolute text-[40px] top-[-1.4rem] text-brown-gold left-[45%];
+  @apply absolute text-[30px] sm:text-[40px] top-[-1.4rem] text-brown-gold left-[45%];
 }
 .about-intro {
-  @apply flex flex-col items-center text-brown-light text-center px-7 base:px-12 py-4 gap-7;
+  @apply flex flex-col items-center text-brown-light text-center py-4 gap-7;
 }
 .about-intro div {
-  @apply w-full md:w-[800px];
+  @apply w-full;
 }
 .about-intro h2 {
-  @apply text-[20px] md:text-[30px] font-bold;
-  font-family: "Roboto", sans-serif;
+  @apply text-[20px] md:text-[30px] font-bold font-heading;
 }
 .about-intro p {
-  @apply leading-10 text-[14px] md:text-[16px];
+  @apply leading-10 text-[14px] md:text-[16px] font-alt;
 }
 .about-mission {
-  @apply flex items-center md:flex-row flex-col gap-8 lg:gap-[5rem] px-7 base:px-12  py-4 md:py-[4rem];
+  @apply flex items-center md:flex-row flex-col gap-8 lg:gap-[5rem] py-4 md:py-[4rem];
 }
 .about-mission .about-mission-2 {
   @apply flex flex-col gap-3 text-brown-light w-full md:w-[700px];
 }
 .about-mission .about-mission-2 h2 {
-  @apply text-[20px] md:text-[30px] font-bold;
-  font-family: "Roboto", sans-serif;
+  @apply text-[20px] md:text-[30px] font-bold font-heading;
 }
 .about-mission .about-mission-2 p {
-  @apply leading-10 text-[14px] md:text-[16px] text-justify;
+  @apply leading-10 text-[14px] md:text-[16px] text-justify font-alt;
 }
 .about-mission .img-container {
   @apply h-[400px] w-[500px];
@@ -457,26 +455,24 @@
   object-position: top;
 }
 .about-how-we-work {
-  @apply px-7 base:px-12  py-5;
+  @apply py-5;
 }
 .about-how-we-work h2,
 .about-team h2 {
-  @apply text-brown-light text-[20px] md:text-[30px] font-bold text-center;
-  font-family: "Roboto", sans-serif;
+  @apply text-brown-light text-[20px] md:text-[30px] font-bold text-center font-heading;
 }
 .about-how-we-work p,
 .about-team p {
-  @apply text-brown-light w-full text-[14px] lg:text-[16px] text-center mb-10;
-  font-family: "Roboto", sans-serif;
+  @apply text-brown-light w-full text-[14px] lg:text-[16px] text-center mb-10 font-alt;
 }
 .about-team {
-  @apply px-7 base:px-12  py-5 text-brown-gold;
+  @apply py-5 text-brown-gold;
 }
 .about-team header {
   @apply flex flex-col items-center justify-center;
 }
 .about-team p {
-  @apply w-full md:w-[800px];
+  @apply w-full md:w-[800px] font-alt;
 }
 .about-team .team-member {
   @apply flex items-center gap-[3rem] lg:flex-row flex-col;
@@ -488,7 +484,7 @@
   @apply flex flex-col items-center justify-center;
 }
 .team-bio-data p {
-  @apply mb-5 px-9 w-full;
+  @apply mb-5 px-9 w-full font-alt;
 }
 .team-carousel .swiper-button-next,
 .team-carousel .swiper-button-prev {

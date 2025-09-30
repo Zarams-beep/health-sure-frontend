@@ -41,7 +41,7 @@ export default function TeamSection() {
   ];
 
   return (
-    <section className="about-team">
+    <section className="about-team container">
       <header>
       <h2 className="">Meet Our Team</h2>
       <p className="">
