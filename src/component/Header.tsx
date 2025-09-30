@@ -3,7 +3,7 @@ import { GiHealthCapsule } from "react-icons/gi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function HeaderSection() {
@@ -12,6 +12,9 @@ export default function HeaderSection() {
   const [isOpen3, setIsOpen3] = useState(false);
 
   const handleOpen3 = () => setIsOpen3((prev) => !prev);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -26,12 +29,9 @@ export default function HeaderSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const pathname = usePathname();
-
   return (
     <motion.header
       className="header-section"
-      /** fade in from top on page load */
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: isSticky }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -71,7 +71,7 @@ export default function HeaderSection() {
               {/* Products Dropdown */}
               <li
                 className={`dropdown-container ${
-                  pathname === "/products" ? "active" : ""
+                  pathname.startsWith("/products") ? "active" : ""
                 }`}
                 onMouseEnter={() => setIsDropdownOpen(true)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
@@ -81,7 +81,6 @@ export default function HeaderSection() {
                 <div className="dropdown-container-2">
                   {isDropdownOpen || isOpen3 ? <IoIosArrowUp /> : <IoIosArrowDown />}
 
-                  {/* AnimatePresence for smooth dropdown */}
                   <AnimatePresence>
                     {(isDropdownOpen || isOpen3) && (
                       <motion.div
@@ -119,17 +118,10 @@ export default function HeaderSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <button
-              className="login-btn"
-              onClick={() => (window.location.href = "/auth/log-in")}
-            >
+            <button className="login-btn" onClick={() => router.push("/auth/log-in")}>
               Log In
             </button>
-
-            <button
-              className="signup-btn"
-              onClick={() => (window.location.href = "/auth/sign-up")}
-            >
+            <button className="signup-btn" onClick={() => router.push("/auth/sign-up")}>
               Sign Up
             </button>
           </motion.div>
