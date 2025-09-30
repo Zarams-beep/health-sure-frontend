@@ -4,15 +4,14 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HeaderSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSticky, setSticky] = useState(1);
   const [isOpen3, setIsOpen3] = useState(false);
 
-  const handleOpen3 = () => {
-    setIsOpen3((prev) => !prev);
-  };
+  const handleOpen3 = () => setIsOpen3((prev) => !prev);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -23,31 +22,44 @@ export default function HeaderSection() {
       setSticky(Math.max(1 - scrollTop / maxScroll, 0.6));
     };
 
-    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const pathname = usePathname();
 
   return (
-    <>
-      <header className="header-section" style={{ opacity: isSticky }}>
+    <motion.header
+      className="header-section"
+      /** fade in from top on page load */
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: isSticky }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      style={{ opacity: isSticky }}
+    >
+      <div className="container">
         <div className="header-section-div">
-          {/* header part 1 */}
-          <div className="header-part-1">
+          {/* Logo */}
+          <motion.div
+            className="header-part-1"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
             <GiHealthCapsule className="logo-icon" />
             <div>
               <h2>Health</h2>
               <h2 className="sure">Sure</h2>
             </div>
-          </div>
+          </motion.div>
 
-          {/* header part 2 */}
-          <div className="header-part-2">
+          {/* Nav Links */}
+          <motion.div
+            className="header-part-2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             <ul>
               <li className={pathname === "/" ? "active" : ""}>
                 <Link href="/">Home</Link>
@@ -55,6 +67,8 @@ export default function HeaderSection() {
               <li className={pathname === "/about-us" ? "active" : ""}>
                 <Link href="/about-us">About Us</Link>
               </li>
+
+              {/* Products Dropdown */}
               <li
                 className={`dropdown-container ${
                   pathname === "/products" ? "active" : ""
@@ -66,39 +80,61 @@ export default function HeaderSection() {
                 Products
                 <div className="dropdown-container-2">
                   {isDropdownOpen || isOpen3 ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                  {isDropdownOpen && (
-                    <div className="dropdown-section">
-                      <p>
-                        <Link href="/">Track your health savings</Link>
-                      </p>
-                      <p>
-                        <Link href="/">View proof of deposits and withdrawals</Link>
-                      </p>
-                      <p>
-                        <Link href="/">Secure financial tracking</Link>
-                      </p>
-                    </div>
-                  )}
+
+                  {/* AnimatePresence for smooth dropdown */}
+                  <AnimatePresence>
+                    {(isDropdownOpen || isOpen3) && (
+                      <motion.div
+                        className="dropdown-section"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <p>
+                          <Link href="/">Track your health savings</Link>
+                        </p>
+                        <p>
+                          <Link href="/">View proof of deposits and withdrawals</Link>
+                        </p>
+                        <p>
+                          <Link href="/">Secure financial tracking</Link>
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </li>
+
               <li className={pathname === "/contact-us" ? "active" : ""}>
                 <Link href="/contact-us">Contact Us</Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* header part 3 */}
-          <div className="header-part-3">
-            <button className="login-btn" onClick={() => window.location.href = "/auth/log-in"}>
+          {/* Buttons */}
+          <motion.div
+            className="header-part-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <button
+              className="login-btn"
+              onClick={() => (window.location.href = "/auth/log-in")}
+            >
               Log In
-              </button>
+            </button>
 
-            <button className="signup-btn" onClick={() => window.location.href = "/auth/sign-up"}>
+            <button
+              className="signup-btn"
+              onClick={() => (window.location.href = "/auth/sign-up")}
+            >
               Sign Up
-              </button>
-          </div>
+            </button>
+          </motion.div>
         </div>
-      </header>
-    </>
+      </div>
+    </motion.header>
   );
 }

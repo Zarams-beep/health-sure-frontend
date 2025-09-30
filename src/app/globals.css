@@ -19,7 +19,7 @@
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .container {
-  @apply w-full;
+  @apply w-full max-w-[110rem] px-5 base:px-10 mx-auto;
 }
 /* body, html{
   @apply h-[100vh]
@@ -29,7 +29,7 @@
 /* header styling starts */
 .header-section {
   font-family: "Manrope", sans-serif;
-  @apply flex w-full bg-milky text-brown py-3 px-5 base:px-7 font-semibold sticky top-0 z-[1000];
+  @apply flex w-full bg-milky text-brown font-semibold sticky py-3 top-0 z-[1000];
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .header-section .header-section-div {
@@ -143,8 +143,11 @@
 
 /* home page - hero starts */
 .hero-section {
-  @apply bg-brown overflow-x-hidden text-white-offWhite w-full h-full py-9 px-7 base:px-12 flex flex-col gap-10;
+  @apply bg-brown overflow-x-hidden text-white-offWhite w-full h-full py-9  flex flex-col gap-10;
   font-family: "Manrope", sans-serif;
+}
+.hero-section .container{
+  @apply flex flex-col gap-5
 }
 .hero-section .hero-section-1 {
   @apply flex items-start lg:items-center gap-8 lg:flex-row flex-col w-full 2xl:gap-8;
@@ -194,7 +197,7 @@
 
 /* home page - features styling starts */
 .features-container {
-  @apply flex flex-col items-center px-7 base:px-12 mt-[6rem];
+  @apply flex flex-col items-center mt-[6rem];
 }
 .features-container header {
   @apply flex flex-col items-center text-center mb-10;
@@ -208,7 +211,7 @@
   font-family: "Manrope", sans-serif;
 }
 .features-section {
-  @apply flex flex-wrap justify-center gap-[1.5rem];
+  @apply flex flex-wrap justify-center gap-[1.5rem] w-full;
 }
 .features-part {
   @apply relative w-full max-w-[500px] overflow-hidden rounded-[9px];
@@ -238,9 +241,8 @@
 .faq-section {
   @apply py-16 bg-milky mt-[6rem];
 }
-
 .faq-container {
-  @apply max-w-4xl mx-auto px-6;
+  @apply  mx-auto;
 }
 
 .faq-title {
@@ -252,7 +254,7 @@
 }
 
 .faq-question {
-  @apply flex justify-between items-center font-semibold text-[14px] xs:text-[16px];
+  @apply flex justify-between w-full items-center font-semibold text-[14px] xs:text-[16px];
 }
 
 .faq-answer {
@@ -263,7 +265,10 @@
 /* blog styling starts */
 
 .blog-section {
-  @apply flex flex-col items-center px-7 base:px-12 mt-[6rem];
+  @apply flex flex-col items-center mt-[6rem];
+}
+.blog-container{
+  @apply w-full
 }
 .blog-section header {
   @apply flex flex-col items-center text-center mb-10;
@@ -277,7 +282,7 @@
   font-family: "Manrope", sans-serif;
 }
 .blog-list {
-  @apply flex flex-col md:flex-row gap-6;
+  @apply flex flex-col md:flex-row gap-6 w-full;
 }
 
 .blog-card {
@@ -347,8 +352,11 @@
 /* footer styling starts */
 
 .landing-footer {
-  @apply bg-brown overflow-x-hidden text-white-offWhite w-full h-full py-9 px-7 base:px-12 flex flex-col gap-10;
+  @apply bg-brown overflow-x-hidden text-white-offWhite w-full h-full py-9;
   font-family: "Manrope", sans-serif;
+}
+.landing-footer .container{
+  @apply flex flex-col gap-10 w-full
 }
 .landing-footer .landing-footer-section {
   @apply flex flex-col gap-10;

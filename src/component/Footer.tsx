@@ -27,6 +27,7 @@ export default function FooterSection() {
   return (
     <>
       <footer className="landing-footer">
+        <div className="container">
         <div className="landing-footer-section">
           {/* Input section */}
           <div className="input-div-footer">
@@ -106,7 +107,7 @@ export default function FooterSection() {
           <div className="copyright">
             <p>Copyright &#169; 2025, Health Sure. All rights reserved</p>
           </div>  </div>
-        </div>
+        </div></div>
       </footer>
     </>
   );

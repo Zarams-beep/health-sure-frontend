@@ -2,82 +2,76 @@
 import { GiHealthCapsule } from "react-icons/gi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { useState, useEffect, useRef } from "react";
-// import { useMediaQuery } from "react-responsive";
 import { CgProfile } from "react-icons/cg";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+
 export default function MediaHeaderSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-//   const [isOpen3, setIsOpen3] = useState(false);
   const [isSticky, setSticky] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
- const [isMobile, setIsMobile] = useState(false);
-   
-     useEffect(() => {
-         const checkScreenSize = () => {
-           setIsMobile(window.innerWidth < 920);
-         };
-   
-         checkScreenSize(); // Run once
-         window.addEventListener("resize", checkScreenSize);
-   
-         return () => window.removeEventListener("resize", checkScreenSize);
-     }, []);
-
-  const handleOpen2 = () => {
-    setIsOpen2((prev) => !prev);
-    setIsOpen(false)
-  };
-  const handleOpen = () => {
-    setIsOpen((prev) => !prev);
-    setIsOpen2(false)
-  };
-
+  // Responsive check
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const checkScreenSize = () => setIsMobile(window.innerWidth < 920);
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const maxScroll = 100;
-      setSticky(Math.max(1 - scrollTop / maxScroll, 0.6));
-    };
+  // Sticky opacity + outside click
+  useEffect(() => {
+    const handleScroll = () =>
+      setSticky(Math.max(1 - window.scrollY / 100, 0.6));
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const pathname = usePathname();
-  return (
-    <header className="header-section" style={{ opacity: isSticky }}>
-      <div className="header-section-div">
-        {/* Header Left */}
-        <div className="header-part-1">
-          <GiHealthCapsule className="logo-icon" />
-          <div>
-            <h2>Health</h2>
-            <h2 className="sure">Sure</h2>
-          </div>
-        </div>
 
-        <div className={isMobile ? "media-header-part-2" : "header-part-2"}>
-          {/* Mobile Menu Toggle */}
-          <div className="menu-container">
+  return (
+    <motion.header
+      className="header-section"
+      style={{ opacity: isSticky }}
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: isSticky }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container">
+        <div className="header-section-div">
+          {/* Left logo */}
+          <motion.div
+            className="header-part-1"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <GiHealthCapsule className="logo-icon" />
+            <div>
+              <h2>Health</h2>
+              <h2 className="sure">Sure</h2>
+            </div>
+          </motion.div>
+
+          <div className={isMobile ? "media-header-part-2" : "header-part-2"}>
+            {/* Mobile toggle */}
             {isMobile && (
-              <div className="menu-icon" onClick={handleOpen}>
+              <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? (
                   <RxCross1 size={30} className="media-icon" />
                 ) : (
@@ -86,75 +80,104 @@ export default function MediaHeaderSection() {
               </div>
             )}
 
-            {/* Navigation Menu */}
-            <div
-              ref={menuRef}
-              className={`menu-part-1 ${isOpen ? "open" : "closed"}`}
-            >
-              <ul>
-                <li className={pathname === "/" ? "active" : ""}>
-                  <Link href="/">Home</Link>
-                </li>
-                <li className={pathname === "/about-us" ? "active" : ""}>
-                  <Link href="/about-us">About Us</Link>
-                </li>
-                <li
-                  className="dropdown-container"
-                  onMouseEnter={() => setIsDropdownOpen(true)}
-                  onMouseLeave={() => setIsDropdownOpen(false)}
-                //   onClick={handleOpen3}
+            {/* Navigation menu */}
+            <AnimatePresence>
+              {(isOpen || !isMobile) && (
+                <motion.div
+                  ref={menuRef}
+                  className={`menu-part-1 ${isMobile ? "" : "desktop-menu"}`}
+                  initial={{ x: isMobile ? "100%" : 0, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: isMobile ? "100%" : 0, opacity: 0 }}
+                  transition={{ duration: 0.35 }}
                 >
-                  Products
-                  <div className="dropdown-container-2">
-                    {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                    {isDropdownOpen && (
-                      <div className="dropdown-section">
-                        <p>
-                          <Link href="/">Track your health savings</Link>
-                        </p>
-                        <p>
-                          <Link href="/">
-                            View proof of deposits and withdrawals
-                          </Link>
-                        </p>
-                        <p>
-                          <Link href="/">Secure financial tracking</Link>
-                        </p>
+                  <ul>
+                    <li className={pathname === "/" ? "active" : ""}>
+                      <Link href="/">Home</Link>
+                    </li>
+                    <li className={pathname === "/about-us" ? "active" : ""}>
+                      <Link href="/about-us">About Us</Link>
+                    </li>
+
+                    {/* Dropdown */}
+                    <li
+                      className="dropdown-container"
+                      onMouseEnter={() => setIsDropdownOpen(true)}
+                      onMouseLeave={() => setIsDropdownOpen(false)}
+                    >
+                      Products
+                      <div className="dropdown-container-2">
+                        {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        <AnimatePresence>
+                          {isDropdownOpen && (
+                            <motion.div
+                              className="dropdown-section"
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <p>
+                                <Link href="/">Track your health savings</Link>
+                              </p>
+                              <p>
+                                <Link href="/">
+                                  View proof of deposits and withdrawals
+                                </Link>
+                              </p>
+                              <p>
+                                <Link href="/">Secure financial tracking</Link>
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
-                    )}
-                  </div>
-                </li>
-                <li className={pathname === "/contact-us" ? "active" : ""}>
-                  <Link href="/contact-us">Contact Us</Link>
-                </li>
-              </ul>
+                    </li>
+
+                    <li className={pathname === "/contact-us" ? "active" : ""}>
+                      <Link href="/contact-us">Contact Us</Link>
+                    </li>
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Profile / auth buttons */}
+            <div className="header-auth-btn-container">
+              <CgProfile
+                size={40}
+                onClick={() => setIsOpen2((prev) => !prev)}
+                className="profile-icon"
+              />
+
+              <AnimatePresence>
+                {isOpen2 && (
+                  <motion.div
+                    className="mini-header-part-3"
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <button
+                      className="login-btn"
+                      onClick={() => (window.location.href = "/auth/log-in")}
+                    >
+                      Log In
+                    </button>
+                    <button
+                      className="signup-btn"
+                      onClick={() => (window.location.href = "/auth/sign-up")}
+                    >
+                      Sign Up
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
-
-          {/* Header Right - Auth Buttons */}
-          <div className="header-auth-btn-container">
-            <CgProfile size={40} onClick={handleOpen2} className="profile-icon"/>
-
-            {isOpen2 && (
-  <div className="mini-header-part-3">
-    <button
-      className="login-btn"
-      onClick={() => window.location.href = "/auth/log-in"}
-    >
-      Log In
-    </button>
-    <button
-      className="signup-btn"
-      onClick={() => window.location.href = "/auth/sign-up"}
-    >
-      Sign Up
-    </button>
-  </div>
-)}
-
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
