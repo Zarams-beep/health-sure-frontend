@@ -503,7 +503,7 @@
 
 /* contact us styling starts */
 .contactUs-form-section {
-  @apply bg-cover bg-center px-7 h-full w-full base:px-12 py-5;
+  @apply bg-cover bg-center h-full w-full py-5;
   background-image: url("/hero-img-2.jpg");
 }
 .contactUs-form-body {
@@ -515,14 +515,12 @@
 }
 .contactUs-form-body .firstHeader h2,
 .login-form-container .form-header .form-title {
-  @apply text-[20px] md:text-[30px] font-bold;
-  font-family: "Roboto", sans-serif;
+  @apply text-[20px] md:text-[30px] font-bold font-heading;
 }
 .contactUs-form-body .firstHeader h6,
 .contactUs-body .contactUs-part-one p,
 .login-form-container .form-header p {
-  @apply text-[13px] md:text-[15px] tracking-wide text-wrap;
-  font-family: "Manrope", sans-serif;
+  @apply text-[13px] md:text-[15px] tracking-wide text-wrap font-alt;
 }
 .contactUs-form-body .contactUs-body {
   @apply flex items-start gap-10 w-full lg:flex-row flex-col-reverse;
@@ -531,8 +529,7 @@
   @apply flex flex-col w-full lg:w-[900px] gap-7;
 }
 .contactUs-body .contactUs-part-one h3 {
-  @apply font-bold text-[16px];
-  font-family: "Roboto", sans-serif;
+  @apply font-bold text-[16px] font-heading;
 }
 .contactUs-body .contactUs-part-one .contactUs-socials {
   @apply flex items-center justify-between w-[150px] text-[20px];
@@ -563,13 +560,13 @@
 .contactUs-input label,
 .contactUs-message label,
 .contactUs-select label {
-  @apply text-[14px] font-bold;
+  @apply text-[14px] font-bold font-heading;
 }
 .contactUs-subject {
   @apply flex flex-col gap-1;
 }
 .contactUs-subject label {
-  @apply text-[16px] font-normal;
+  @apply text-[16px] font-normal font-heading;
 }
 .contactUs-submit-container {
   @apply flex items-center justify-center;
