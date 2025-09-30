@@ -641,7 +641,7 @@
   @apply flex flex-col gap-4;
 }
 .login-form .input-group label {
-  @apply text-[16px];
+  @apply text-[16px] font-heading;
 }
 .login-form .input-wrapper input {
   @apply border-none bg-transparent 
@@ -654,7 +654,7 @@
   @apply flex items-center justify-between h-full w-full;
 }
 .error-message{
-  @apply flex items-center gap-1 text-[14px] text-[red]
+  @apply flex items-center gap-1 text-[14px] text-[red] font-modern
 }
 .submit-button {
   @apply w-full rounded-[20px] p-2 font-bold;
@@ -691,16 +691,15 @@
 
 /* nav bar styling starts */
 .dashboard-header {
-  font-family: "Manrope", sans-serif;
   @apply flex w-full bg-milky text-brown py-3 px-5 
-  base:px-7 font-semibold sticky top-0 z-[1000] h-auto;
+  base:px-7 font-semibold sticky top-0 z-[1000] h-auto font-heading;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .dashboard-header .dashboard-nav-bar {
   @apply flex items-center justify-between gap-4 md:gap-8 w-full;
 }
 .dashboard-header .dashboard-nav-bar .search-container {
-  @apply flex items-center w-full px-3 text-[14px] md:text-[16px] text-brown py-2 border border-brown-grey rounded-[10px];
+  @apply flex items-center w-full px-3 text-[14px] md:text-[16px] text-brown font-heading py-2 border border-brown-grey rounded-[10px];
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .dashboard-header .dashboard-nav-bar .search-input {
@@ -722,10 +721,10 @@
   @apply w-full h-full rounded-[100%] bg-cover bg-center;
 }
 .dashboard-header .dashboard-nav-bar .profile-section .profile-small h4 {
-  @apply font-[800px] capitalize mt-2 leading-[13px] flex-wrap;
+  @apply font-[800px] capitalize mt-2 leading-[13px] flex-wrap font-heading;
 }
 .dashboard-header .dashboard-nav-bar .profile-section .profile-small p {
-  @apply text-[12px];
+  @apply text-[12px] font-alt;
 }
 .dashboard-header .dashboard-nav-bar .profile-section .icon-section {
   @apply hidden md:flex items-center flex-row text-[18px] md:text-[25px] h-[70px] gap-1 md:gap-4 pl-0 md:pl-4 border-none md:border-l border-l-brown;
@@ -747,7 +746,7 @@
   @apply w-[80px] items-center;
 }
 .sidebar h2 {
-  @apply text-[16px] md:text-[20px] border-b border-b-white-offWhite flex items-center py-3 mb-5 gap-1;
+  @apply text-[16px] md:text-[20px] border-b border-b-white-offWhite flex items-center py-3 mb-5 gap-1 font-heading;
 }
 .sidebar h2 div {
   @apply flex;
@@ -808,7 +807,7 @@
   @apply flex items-start gap-5 justify-between;
 }
 .dashboard-card-section-2 h3 {
-  @apply font-bold text-[15px] smm:text-[20px];
+  @apply font-bold text-[15px] smm:text-[20px] font-heading;
 }
 .dashboard-card-main .icon-style {
   @apply text-[25px] smm:text-[40px];
@@ -836,10 +835,10 @@
 }
 .sign-choice .red-style,
 .sign-choice .green-style {
-  @apply text-[15px] smm:text-[20px];
+  @apply text-[15px] smm:text-[20px] font-modern;
 }
 .sign-choice span {
-  @apply text-[12px] smm:text-[14px];
+  @apply text-[12px] smm:text-[14px] font-modern;
 }
 .dashboard-card-section .dashboard-card-section-3 .sign-choice {
   @apply flex items-center;
@@ -859,7 +858,7 @@
   @apply flex items-center justify-between mb-6;
 }
 .semi-appointment-container header h3, .current-diagnosis-container h4, .past-diagnosis-container h4 {
-  @apply text-[16px] smm:text-[20px] font-bold;
+  @apply text-[16px] smm:text-[20px] font-bold font-heading;
 }
 .semi-appointment-container header .add-button {
   @apply text-[16px] smm:text-[20px];
@@ -880,10 +879,10 @@
   @apply flex flex-col gap-[2px];
 }
 .semi-appointment-container .appointment-info h3 {
-  @apply font-bold text-[12px] smm:text-[18px];
+  @apply font-bold text-[12px] smm:text-[18px] font-heading;
 }
 .semi-appointment-container .appointment-info p {
-  @apply text-[12px] smm:text-[14px] text-[gray];
+  @apply text-[12px] smm:text-[14px] text-[gray] font-alt;
 }
 .semi-appointment-container .btn-show{
   @apply text-[10px] smm:text-[12px] font-bold text-navyBlue
@@ -906,10 +905,10 @@
   @apply flex flex-col gap-2;
 }
 .current-diagnosis-container .current-diagnosis-box h5, .past-diagnosis-container h5 {
-  @apply text-[14px] smm:text-[17px] underline decoration-double decoration-brown font-bold;
+  @apply text-[14px] smm:text-[17px] underline decoration-double decoration-brown font-bold font-alt;
 }
 .current-diagnosis-container .current-diagnosis-box p, .past-diagnosis-container .past-diagnosis-box{
-  @apply text-[12px] smm:text-[14px]
+  @apply text-[12px] smm:text-[14px] font-alt
 }
 /* current diagnosis styling ends */
 /* blood pressure styling starts */
@@ -921,7 +920,7 @@
   @apply flex items-center smm:flex-row flex-col gap-y-2 mb-2 justify-between p-0 smm:p-5 text-[14px] smm:text-[17px];
 }
 .blood-pressure-container-header h2 {
-  @apply font-bold text-brown;
+  @apply font-bold text-brown font-heading;
 }
 .blood-pressure-container-header select {
   @apply border-[1px] border-brown-grey px-2 py-1 rounded-[3px] text-brown hover:cursor-pointer;
@@ -947,10 +946,10 @@
   @apply w-full flex flex-col text-[#372D25]
 }
 .balance-main .welcome-msg h3{
-  @apply text-[20px] sm:text-[30px] font-bold
+  @apply text-[20px] sm:text-[30px] font-bold font-heading
 }
 .balance-main .welcome-msg p{
-  @apply text-[15px] sm:text-[18px]
+  @apply text-[15px] sm:text-[18px] font-alt
 }
 .balance-main .balance-container {
   @apply bg-gradient-to-b from-[#CBB590] to-[#372D25] w-full h-[168px] 
@@ -970,16 +969,16 @@
   @apply w-[31px] h-[33px]
 }
 .balance-main .balance-container .left-side section p{
-  @apply font-bold sm:flex hidden text-[26px]
+  @apply font-bold sm:flex hidden text-[26px] font-alt
 }
  .balance-main button{
-  @apply text-[20px]
+  @apply text-[20px] font-alt
 }
 .wallet-quick-actions-container{
   @apply flex flex-col gap-4
 }
 .wallet-quick-actions-container h3{
-  @apply text-[20px] leading-[100%] font-[500]
+  @apply text-[20px] leading-[100%] font-[500] font-heading
 }
 .wallet-quick-actions-container .wallet-quick-actions-container-2{
   @apply flex flex-col gap-9
@@ -994,10 +993,10 @@
   @apply flex flex-col gap-1 items-start
 }
 .wallet-quick-actions-container .wallet-quick-action-text h4{
-  @apply text-[15px] sm:text-[18px]
+  @apply text-[15px] sm:text-[18px] font-heading
 }
 .wallet-quick-actions-container .wallet-quick-action-text p{
-  @apply text-[13px] md:text-[16px] smm:flex hidden text-start
+  @apply text-[13px] md:text-[16px] smm:flex hidden text-start font-alt
 }
 .wallet-quick-actions-container .wallet-quick-action-arrow{
   @apply sm:flex hidden sm:text-[25px]
@@ -1018,11 +1017,11 @@
   @apply flex flex-col gap-4;
 }
 .pay-via-card-section header div h2, .bank-transfer-container header h2{
-  @apply text-[18px] sm:text-[25px] font-[500] leading-[100%] text-[#372D25];
+  @apply text-[18px] sm:text-[25px] font-[500] leading-[100%] text-[#372D25] font-heading;
 
 }
 .pay-via-card-section header div h5{
-  @apply text-[14px] sm:text-[16px] font-[500] leading-[100%] text-[#372D25];
+  @apply text-[14px] sm:text-[16px] font-[500] leading-[100%] text-[#372D25] font-alt;
 }
 .pay-via-card-section form{
   @apply flex flex-col gap-9 px-4 py-2;
@@ -1034,7 +1033,7 @@
   @apply flex flex-col w-full gap-4
 }
 .pay-via-card-section form section .input-section label{
-  @apply text-[#372D25] text-[13px] sm:text-[15px] smm:text-[17px] font-[500] leading-[100%];
+  @apply text-[#372D25] text-[13px] sm:text-[15px] smm:text-[17px] font-[500] leading-[100%] font-heading;
 }
 .pay-via-card-section form section .input-section input{
   @apply border border-[#B3B3B3] bg-transparent rounded-[7px] px-2 py-4 text-[14px] sm:text-[16px] w-full
@@ -1052,7 +1051,7 @@
   @apply border border-[#F1F1F1]
 }
 .save-card label{
-  @apply text-[#372D25] text-[12px] sm:text-[14px] font-[500] leading-[100%];
+  @apply text-[#372D25] text-[12px] sm:text-[14px] font-[500] leading-[100%] font-heading;
 }
 .secure-paystack{
   @apply text-[14px] text-[#333333] leading-[100%] font-[500];
@@ -1088,17 +1087,16 @@
   @apply flex flex-col gap-2
 }
 .transfer-details h6,  .transfer-details-2 div h6{
-  @apply text-[12px] sm:text-[14px] font-[400] text-[#372D25] leading-[100%];
+  @apply text-[12px] sm:text-[14px] font-[400] text-[#372D25] leading-[100%] font-heading;
 }
 .transfer-details p,  .transfer-details-2 div p{
-  @apply text-[14px] sm:text-[16px] text-[#372D25] font-[500] leading-[100%];
-  font-family: "Montserrat", sans-serif;
+  @apply text-[14px] sm:text-[16px] text-[#372D25] font-[500] leading-[100%] font-alt;
 }
 .copy-container{
   @apply cursor-pointer relative
 }
 .copy-container span{
-  @apply absolute top-[-20px] left-1/2 transform -translate-x-1/2 bg-[#F1F1F1] text-white text-xs px-2 py-1 rounded
+  @apply absolute top-[-20px] left-1/2 transform -translate-x-1/2 bg-[#F1F1F1] text-white text-xs px-2 py-1 rounded font-modern
 }
 /* bank transfer styling ends */
 
@@ -1112,8 +1110,7 @@
   @apply w-[288px] h-[265px] bg-[#FFFFFF] flex flex-col gap-[2rem] rounded-[10px] px-[2rem] py-[1rem] justify-center items-center border border-[#F1F1F1];
 }
 .modal-content h3 {
-  @apply font-bold;
-  font-family: "Lato", sans-serif;
+  @apply font-bold font-heading;
 }
 .modal-content .modal-img {
   @apply w-[84px] h-[79px];
@@ -1132,20 +1129,20 @@
 
 }
 .drop-down-section label{
-  @apply text-[14px] sm:text-[16px] text-[#372D25] font-[500] leading-[100%];
+  @apply text-[14px] sm:text-[16px] text-[#372D25] font-[500] leading-[100%] font-heading;
 }
 .drop-down-section select{
-  @apply flex items-center text-[14px] sm:text-[16px]
+  @apply flex items-center text-[14px] sm:text-[16px] font-heading
 }
 /* bank ussd styling ends */
 /* pay via card styling ends */
 
 /* modal transaction, table styling starts */
 .table-header{
-  @apply font-bold text-[20px] text-[#372D25]
+  @apply font-bold text-[20px] text-[#372D25] font-heading
 }
 .table-body{
-  @apply text-[15px]
+  @apply text-[15px] font-alt
 }
 .table-cell{
   @apply flex items-center gap-3
@@ -1166,7 +1163,7 @@
   @apply flex flex-col gap-2
 }
 .modal-transaction-2 p{
-  @apply smm:text-[16px] text-[14px]
+  @apply smm:text-[16px] text-[14px] font-alt
 }
 .modal-transaction .transaction-text{
   @apply flex items-center gap-2 flex-row
@@ -1190,13 +1187,13 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .edit-basic-info h2{
-  @apply text-[30px] text-center font-bold
+  @apply text-[30px] text-center font-bold font-heading
 }
 .form-health-container-main, .form-health-container-2{
   @apply flex flex-col gap-4
 }
 .form-health-container-2 h3{
-  @apply text-[20px] font-[600] text-center mt-4
+  @apply text-[20px] font-[600] text-center mt-4 font-heading
 }
 .form-health-container, .form-health-vital{
   @apply grid grid-cols-2 gap-x-7 gap-y-3
@@ -1207,10 +1204,10 @@
   @apply flex flex-col gap-2 }
 
 .form-health-container .form-health-sub label, .form-health-container-2 label{
-  @apply text-[15px] font-semibold
+  @apply text-[15px] font-semibold font-heading
 }
 .form-health-container .form-health-sub input, .form-health-container .form-health-sub select, .form-health-container-2 input{
-  @apply p-2 placeholder:text-[16px] rounded-[5px] outline-brown bg-transparent border border-lightGrey text-[16px]
+  @apply p-2 placeholder:text-[16px] rounded-[5px] outline-brown bg-transparent border border-lightGrey text-[16px] font-alt
 }
 .form-health-container .form-health-sub select, .form-health-container .form-health-sub .date-input{
   @apply cursor-pointer
@@ -1254,7 +1251,7 @@
 
 /* view styling starts */
 .info-link{
-  @apply text-[#5252c9]
+  @apply text-[#5252c9] font-modern
 }
 /* manage health styling ends */
 
@@ -1269,13 +1266,13 @@
   @apply flex items-center gap-2 mb-1
 }
 .info-item h4{
-  @apply capitalize text-[16px] font-semibold
+  @apply capitalize text-[16px] font-semibold font-heading
 }
 .pinned-section{
   @apply flex flex-col gap-4
 }
 .pinned-section h2{
-  @apply font-bold text-[20px]
+  @apply font-bold text-[20px] font-heading
 }
 .pinned-section-2{
   @apply relative flex items-center justify-center
@@ -1291,7 +1288,7 @@
   @apply flex flex-col gap-2
 }
 .small-treatment-flex h3{
-  @apply text-[14px] font-bold;
+  @apply text-[14px] font-bold font-heading;
 }
 /* manage health styling view ends */
 
@@ -1321,16 +1318,16 @@
   @apply flex flex-col gap-4;
 }
 .dashboard-meet-doctor-form-area .form-area-2 .emergency-info h3, .dashboard-meet-doctor-form-area .form-area-2 .request-appointment h3{
-  @apply text-[13px] sm:text-[16px] font-bold text-[#372D25]
+  @apply text-[13px] sm:text-[16px] font-bold text-[#372D25] font-heading
 }
 .dashboard-meet-doctor-form-area .form-area-2 .emergency-info .small-meet-doctor{
   @apply flex items-start gap-2
 }
 .dashboard-meet-doctor-form-area .form-area-2 .emergency-info .small-meet-doctor h5{
-  @apply text-[10px] sm:text-[13px] font-semibold;
+  @apply text-[10px] sm:text-[13px] font-semibold font-heading;
 }
 .dashboard-meet-doctor-form-area .form-area-2 .emergency-info .small-meet-doctor p{
-  @apply text-[10px] sm:text-[12px]
+  @apply text-[10px] sm:text-[12px] font-heading
 }
 .dashboard-meet-doctor-form-area .form-area-2 .request-appointment{
   @apply flex flex-col gap-3 w-full
@@ -1339,7 +1336,7 @@
   @apply flex flex-col gap-4
 }
 .dashboard-meet-doctor-form-area .form-area-2 .request-appointment .meet-doctor-form input, .dashboard-meet-doctor-form-area .form-area-2 .request-appointment .meet-doctor-form textarea{
-  @apply  p-2 placeholder:text-[10px] sm:placeholder:text-[13px] rounded-[5px] outline-brown bg-transparent border border-lightGrey text-[10px] sm:text-[13px];
+  @apply  p-2 placeholder:text-[10px] sm:placeholder:text-[13px] rounded-[5px] outline-brown bg-transparent border border-lightGrey text-[10px] sm:text-[13px] font-alt;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .dashboard-meet-doctor-form-area .form-area-2 .request-appointment .meet-doctor-form select{
@@ -1357,10 +1354,10 @@
   @apply text-[4rem] text-brown
 }
 .meet-doctor-modal-content h2{
-  @apply text-[16px] text-brown font-bold;
+  @apply text-[16px] text-brown font-bold font-heading;
 }
 .meet-doctor-modal-content p{
-  @apply text-[13px] text-center text-brown
+  @apply text-[13px] text-center text-brown font-alt
 }
 .meet-modal-btn{
   @apply flex items-center justify-center;
@@ -1375,13 +1372,13 @@
   @apply flex flex-col gap-4 mt-5;
 }
 .appointment-history h2{
-  @apply text-center font-bold text-[20px] text-brown my-5;
+  @apply text-center font-bold text-[20px] text-brown my-5 font-heading;
 }
 .appointment-history .table-header th{
-  @apply text-brown font-semibold text-[17px]
+  @apply text-brown font-semibold text-[17px] font-alt
 }
 .appointment-history .table-body td{
-  @apply text-brown text-[14px];
+  @apply text-brown text-[14px] font-modern;
 }
 .appointment-history .table-body .btn-appoint button{
   @apply bg-brown text-white-offWhite capitalize text-[14px]
