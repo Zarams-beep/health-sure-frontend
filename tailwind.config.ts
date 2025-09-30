@@ -10,13 +10,13 @@ const config: Config = {
     screens: {
       base: "320px",
       "1sm": "370px",
-      xs:"400px",
+      xs: "400px",
       sm: "420px",
-      smm:"500px",
+      smm: "500px",
       md: "768px",
-      mdd:'896px',
+      mdd: "896px",
       lg: "1024px",
-      lgg:'1200px',
+      lgg: "1200px",
       xl: "1340px",
       "2xl": "1560px",
       "3xl": "3560px",
@@ -54,7 +54,14 @@ const config: Config = {
         dark: "#388E3C",
       },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: ['"Clash Display"', "sans-serif"],
+        body: ['"Inter"', "sans-serif"],
+        alt: ['"Space Grotesk"', "sans-serif"],
+        modern: ['"Sora"', "sans-serif"], 
+      },
+    },
   },
   plugins: [],
 };
