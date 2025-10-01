@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { MedicalHistory } from "@/types/medicalHistory";
 import { CircularProgress } from "@mui/material";
-import { setMedicalHistory } from "@/store/slices/medicalHistory";
+// import { setMedicalHistory } from "@/store/slices/medicalHistory";
 export default function MedicalHistoryView() {
   const storedMedicalHistory = useSelector(
     (state: RootState) => state.medicalHistory

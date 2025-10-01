@@ -35,7 +35,7 @@ export default function HeaderSection() {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: isSticky }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ opacity: isSticky }}
+      // style={{ opacity: isSticky }}
     >
       <div className="container">
         <div className="header-section-div">
