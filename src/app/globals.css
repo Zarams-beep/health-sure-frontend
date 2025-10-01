@@ -578,6 +578,10 @@
 .contactUs-part-two .error-paragraph {
   @apply text-[red] border border-[red];
 }
+.contactUs-input p, .contactUs-select p, .contactUs-message p{
+  @apply text-[red]
+}
+
 /* contact us styling ends */
 
 /* auth styling starts */

@@ -120,7 +120,7 @@ export default function ContactUsForm() {
                       }`}
                     />
                     {errors.firstName && (
-                      <p className="text-[red]">
+                      <p className="">
                         {errors.firstName.message}
                       </p>
                     )}
@@ -140,7 +140,7 @@ export default function ContactUsForm() {
                       }`}
                     />
                     {errors.lastName && (
-                      <p className="text-[red]">
+                      <p className="">
                         {errors.lastName.message}
                       </p>
                     )}
@@ -159,7 +159,7 @@ export default function ContactUsForm() {
                       }`}
                     />
                     {errors.email && (
-                      <p className="text-[red]">{errors.email.message}</p>
+                      <p className="">{errors.email.message}</p>
                     )}
                   </div>
 
@@ -177,7 +177,7 @@ export default function ContactUsForm() {
                       }`}
                     />
                     {errors.phoneNumber && (
-                      <p className="text-[red]">
+                      <p className="">
                         {errors.phoneNumber.message}
                       </p>
                     )}
@@ -229,7 +229,7 @@ export default function ContactUsForm() {
                       </div>
                     </div>
                     {errors.subject && (
-                      <p className="text-[red]">{errors.subject.message}</p>
+                      <p className="">{errors.subject.message}</p>
                     )}
                   </div>
 
@@ -247,7 +247,7 @@ export default function ContactUsForm() {
                       }`}
                     />
                     {errors.message && (
-                      <p className="text-[red]">{errors.message.message}</p>
+                      <p className="">{errors.message.message}</p>
                     )}
                   </div>
 
