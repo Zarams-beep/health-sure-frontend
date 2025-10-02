@@ -46,12 +46,16 @@ export default function ContactUsForm() {
 
       setSuccessMessage("Message sent successfully ✅");
       reset(); // clear form
-    } catch (error: any) {
-      setErrorMessage(error.message || "Something went wrong ❌");
-    } finally {
-      setLoading(false);
-    }
-  };
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    setErrorMessage(error.message);
+  } else if (typeof error === "string") {
+    setErrorMessage(error);
+  } else {
+    setErrorMessage("Something went wrong ❌");
+  }
+}
+  }
 
   // Dynamic button styling logic
   const allFieldsFilled =
