@@ -26,11 +26,11 @@ export default function ContactUsForm() {
   });
 
   const submitData = async (data: ContactUsFormData) => {
-    try {
-      setLoading(true);
-      setSuccessMessage(null);
-      setErrorMessage(null);
+    setLoading(true);
+    setSuccessMessage(null);
+    setErrorMessage(null);
 
+    try {
       const response = await fetch(
         `https://health-sure-backend.onrender.com/contact-us`,
         {
@@ -46,16 +46,18 @@ export default function ContactUsForm() {
 
       setSuccessMessage("Message sent successfully ✅");
       reset(); // clear form
-} catch (error: unknown) {
-  if (error instanceof Error) {
-    setErrorMessage(error.message);
-  } else if (typeof error === "string") {
-    setErrorMessage(error);
-  } else {
-    setErrorMessage("Something went wrong ❌");
-  }
-}
-  }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else if (typeof error === "string") {
+        setErrorMessage(error);
+      } else {
+        setErrorMessage("Something went wrong ❌");
+      }
+    } finally {
+      setLoading(false); // 🔑 stop loading no matter what
+    }
+  };
 
   // Dynamic button styling logic
   const allFieldsFilled =
@@ -132,14 +134,10 @@ export default function ContactUsForm() {
                     {...register("firstName")}
                     placeholder="First Name"
                     className={`${
-                      errors.firstName
-                        ? "error-red-border"
-                        : "error-gray-border"
+                      errors.firstName ? "error-red-border" : "error-gray-border"
                     }`}
                   />
-                  {errors.firstName && (
-                    <p>{errors.firstName.message}</p>
-                  )}
+                  {errors.firstName && <p>{errors.firstName.message}</p>}
                 </div>
 
                 {/* Last Name */}
@@ -184,9 +182,7 @@ export default function ContactUsForm() {
                         : "error-gray-border"
                     }`}
                   />
-                  {errors.phoneNumber && (
-                    <p>{errors.phoneNumber.message}</p>
-                  )}
+                  {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
                 </div>
 
                 {/* Select Subject */}
@@ -227,9 +223,7 @@ export default function ContactUsForm() {
                 {successMessage && (
                   <p className="success-text">{successMessage}</p>
                 )}
-                {errorMessage && (
-                  <p className="error-text">{errorMessage}</p>
-                )}
+                {errorMessage && <p className="error-text">{errorMessage}</p>}
 
                 {/* Submit Button */}
                 <div className="contactUs-submit-container">

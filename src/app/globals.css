@@ -581,7 +581,12 @@
 .contactUs-input p, .contactUs-select p, .contactUs-message p{
   @apply text-[red]
 }
-
+.success-text{
+  @apply text-[green] font-alt text-[14px]
+}
+.error-text{
+  @apply text-[red] font-alt text-[14px]
+}
 /* contact us styling ends */
 
 /* auth styling starts */
