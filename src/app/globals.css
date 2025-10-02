@@ -574,6 +574,9 @@
 .contactUs-body .contact-btn {
   @apply bg-brown p-4 w-[200px] flex items-center justify-center rounded-[3rem] font-bold text-[16px];
 }
+.contactUs-body .contact-btn:disabled{
+  @apply bg-lightGrey hover:cursor-not-allowed
+}
 .error-red-border,
 .contactUs-part-two .error-paragraph {
   @apply text-[red] border border-[red];
