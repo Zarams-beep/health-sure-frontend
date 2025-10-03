@@ -5,9 +5,10 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
 import { FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ContactUsFormData } from "@/types/auth";
 import { contactUsSchema } from "@/features/contactSchema";
+import emailjs from "emailjs-com";
 
 export default function ContactUsForm() {
   const [loading, setLoading] = useState(false);
@@ -25,48 +26,62 @@ export default function ContactUsForm() {
     mode: "onSubmit",
   });
 
+  // Watch all fields
+  const watchedFields = watch();
+
+  // Clear success message when user starts typing again
+  useEffect(() => {
+    if (
+      watchedFields.firstName ||
+      watchedFields.lastName ||
+      watchedFields.email ||
+      watchedFields.phoneNumber ||
+      watchedFields.subject ||
+      watchedFields.message
+    ) {
+      setSuccessMessage(null);
+      setErrorMessage(null);
+    }
+  }, [watchedFields]);
+
   const submitData = async (data: ContactUsFormData) => {
     setLoading(true);
     setSuccessMessage(null);
     setErrorMessage(null);
 
     try {
-      const response = await fetch(
-        'https://health-sure-backend.onrender.com/contact-us',
+      // 🔑 Send via EmailJS
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
+          name: `${data.firstName} ${data.lastName}`,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          title: data.subject,
+          message: data.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! // Public Key
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to send message ❌");
-      }
-
+      console.log("EmailJS result:", result.text);
       setSuccessMessage("Message sent successfully ✅");
-      reset(); // clear form
+      reset(); // clear form so user can type a new one
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else if (typeof error === "string") {
-        setErrorMessage(error);
-      } else {
-        setErrorMessage("Something went wrong ❌");
-      }
+      console.error("EmailJS error:", error);
+      setErrorMessage("Failed to send message ❌");
     } finally {
-      setLoading(false); // 🔑 stop loading no matter what
+      setLoading(false);
     }
   };
 
-  // Dynamic button styling logic
   const allFieldsFilled =
-    watch("firstName") &&
-    watch("lastName") &&
-    watch("email") &&
-    watch("phoneNumber") &&
-    watch("subject") &&
-    watch("message");
+    watchedFields.firstName &&
+    watchedFields.lastName &&
+    watchedFields.email &&
+    watchedFields.phoneNumber &&
+    watchedFields.subject &&
+    watchedFields.message;
 
   return (
     <div className="contactUs-form-section">
@@ -88,7 +103,6 @@ export default function ContactUsForm() {
                 </p>
               </header>
 
-              {/* Contacts */}
               <div className="contactUs-details">
                 <div className="contactUs-details-small">
                   <FaPhoneVolume />
@@ -100,32 +114,20 @@ export default function ContactUsForm() {
                 </div>
                 <div className="contactUs-details-small">
                   <FaLocationDot />
-                  <p>
-                    healthsure, Plot 200 Mountain West, Lagos State, Nigeria.
-                  </p>
+                  <p>healthsure, Plot 200 Mountain West, Lagos State, Nigeria.</p>
                 </div>
               </div>
 
-              {/* Socials */}
               <div className="contactUs-socials">
-                <button className="twitter">
-                  <FaTwitter />
-                </button>
-                <button>
-                  <IoLogoInstagram className="instagram" />
-                </button>
-                <button>
-                  <FaDiscord className="discord" />
-                </button>
+                <button className="twitter"><FaTwitter /></button>
+                <button><IoLogoInstagram className="instagram" /></button>
+                <button><FaDiscord className="discord" /></button>
               </div>
             </div>
 
             {/* Side Two */}
             <div className="contactUs-part-two">
-              <form
-                className="contactUs-form"
-                onSubmit={handleSubmit(submitData)}
-              >
+              <form className="contactUs-form" onSubmit={handleSubmit(submitData)}>
                 {/* First Name */}
                 <div className="contactUs-input">
                   <label htmlFor="firstName">First Name</label>
@@ -133,9 +135,7 @@ export default function ContactUsForm() {
                     id="firstName"
                     {...register("firstName")}
                     placeholder="First Name"
-                    className={`${
-                      errors.firstName ? "error-red-border" : "error-gray-border"
-                    }`}
+                    className={`${errors.firstName ? "error-red-border" : "error-gray-border"}`}
                   />
                   {errors.firstName && <p>{errors.firstName.message}</p>}
                 </div>
@@ -147,9 +147,7 @@ export default function ContactUsForm() {
                     id="lastName"
                     {...register("lastName")}
                     placeholder="Last Name"
-                    className={`${
-                      errors.lastName ? "error-red-border" : "error-gray-border"
-                    }`}
+                    className={`${errors.lastName ? "error-red-border" : "error-gray-border"}`}
                   />
                   {errors.lastName && <p>{errors.lastName.message}</p>}
                 </div>
@@ -162,9 +160,7 @@ export default function ContactUsForm() {
                     {...register("email")}
                     type="email"
                     placeholder="Enter your email"
-                    className={`${
-                      errors.email ? "error-red-border" : "error-gray-border"
-                    }`}
+                    className={`${errors.email ? "error-red-border" : "error-gray-border"}`}
                   />
                   {errors.email && <p>{errors.email.message}</p>}
                 </div>
@@ -176,11 +172,7 @@ export default function ContactUsForm() {
                     id="phoneNumber"
                     {...register("phoneNumber")}
                     placeholder="Enter your phone number"
-                    className={`${
-                      errors.phoneNumber
-                        ? "error-red-border"
-                        : "error-gray-border"
-                    }`}
+                    className={`${errors.phoneNumber ? "error-red-border" : "error-gray-border"}`}
                   />
                   {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
                 </div>
@@ -189,18 +181,12 @@ export default function ContactUsForm() {
                 <div className="contactUs-select">
                   <label>Select Subject?</label>
                   <div className="contactUs-subject">
-                    {["general", "report", "comment", "suggestion"].map(
-                      (value) => (
-                        <label key={value}>
-                          <input
-                            type="radio"
-                            value={value}
-                            {...register("subject")}
-                          />
-                          {value.charAt(0).toUpperCase() + value.slice(1)}
-                        </label>
-                      )
-                    )}
+                    {["general", "report", "comment", "suggestion"].map((value) => (
+                      <label key={value}>
+                        <input type="radio" value={value} {...register("subject")} />
+                        {value.charAt(0).toUpperCase() + value.slice(1)}
+                      </label>
+                    ))}
                   </div>
                   {errors.subject && <p>{errors.subject.message}</p>}
                 </div>
@@ -212,20 +198,16 @@ export default function ContactUsForm() {
                     id="message"
                     {...register("message")}
                     placeholder="Enter your message"
-                    className={`${
-                      errors.message ? "error-red-border" : "error-gray-border"
-                    }`}
+                    className={`${errors.message ? "error-red-border" : "error-gray-border"}`}
                   />
                   {errors.message && <p>{errors.message.message}</p>}
                 </div>
 
-                {/* Success / Error Feedback */}
-                {successMessage && (
-                  <p className="success-text">{successMessage}</p>
-                )}
+                {/* Feedback */}
+                {successMessage && <p className="success-text">{successMessage}</p>}
                 {errorMessage && <p className="error-text">{errorMessage}</p>}
 
-                {/* Submit Button */}
+                {/* Submit */}
                 <div className="contactUs-submit-container">
                   <button
                     className="contact-btn"
