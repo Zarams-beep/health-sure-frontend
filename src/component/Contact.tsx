@@ -32,7 +32,7 @@ export default function ContactUsForm() {
 
     try {
       const response = await fetch(
-        `https://health-sure-backend.onrender.com/contact-us`,
+        'https://health-sure-backend.onrender.com/contact-us',
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
