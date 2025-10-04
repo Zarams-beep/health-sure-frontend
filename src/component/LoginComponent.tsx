@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "@/types/auth";
 import { loginSchema } from "@/features/LoginSchema";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import { GrGithub } from "react-icons/gr";
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -179,21 +181,21 @@ const Login: React.FC = () => {
             )}
           </div>
 
-          <div className="checkbox-group">
-            <input
-              type="checkbox"
-              name="save-details"
-              id="save-details"
-              className="checkbox"
-            />
-            <label htmlFor="save-details" className="checkbox-label">
-              Save details
-            </label>
-            
-          </div>
           <Link href={"/auth/forgot-password"} className="forgot-password-link">
               Forgot password
             </Link>
+
+            <button className="oauth-btn btn-google" onClick={() => window.location.href = 'https://health-sure-backend.onrender.com/auth/google'}>
+              <FcGoogle/>
+  Login with Google
+</button>
+
+<button className="oauth-btn btn-github" onClick={() => window.location.href = 'https://health-sure-backend.onrender.com/auth/github'}>
+  <GrGithub/>
+  Login with GitHub
+</button>
+
+
           <button
             className={`submit-button ${
               allFieldsFilled ? "active-button" : "disabled-button"

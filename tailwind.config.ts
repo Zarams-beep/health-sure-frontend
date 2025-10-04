@@ -29,7 +29,7 @@ const config: Config = {
       brown: {
         gold: "#b87d50",
         grey: "#f3dbc8",
-        light: "#675F4C",
+       light: "#675F4C",
         DEFAULT: "#372D25",
       },
       milky: "#CBB590",
