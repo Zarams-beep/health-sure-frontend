@@ -17,13 +17,13 @@ export default function HomePageHeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true }}
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true }}
           >
             Your Health, Your Security
           </motion.h1>
@@ -32,7 +32,7 @@ export default function HomePageHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true }}
           >
             Experience a smarter way to manage your health funds with{" "}
             <strong>Health Sure</strong>—where transparency meets trust.
@@ -42,7 +42,7 @@ export default function HomePageHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true }}
           >
             Track your deposits, withdrawals, and balances effortlessly,
             ensuring peace of mind with every transaction.
@@ -66,7 +66,7 @@ export default function HomePageHeroSection() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true }}
         >
           <Image
             src="/hero-img-2.jpg"

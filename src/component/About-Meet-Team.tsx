@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function TeamSection() {
   const teamMembers = [
@@ -42,14 +43,20 @@ export default function TeamSection() {
 
   return (
     <section className="about-team container">
-      <header>
-      <h2 className="">Meet Our Team</h2>
-      <p className="">
-        Our dedicated team of healthcare professionals, financial experts, and tech 
-        innovators are committed to making healthcare financing seamless and stress-free.
-      </p>
+      <motion.header
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="">Meet Our Team</h2>
+        <p>
+          Our dedicated team of healthcare professionals, financial experts, and
+          tech innovators are committed to making healthcare financing seamless
+          and stress-free.
+        </p>
+      </motion.header>
 
-      </header>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={30}
@@ -62,21 +69,40 @@ export default function TeamSection() {
       >
         {teamMembers.map((member, index) => (
           <SwiperSlide key={index}>
-            <div className="team-member">
-              <Image 
-                src={member.image} 
-                alt={member.name} 
-                width={400} 
-                height={250} 
-                quality={100} 
-                className="for-team-img"
-              />
-              <div className="team-bio-data">
-              <h3 className="">{member.name}</h3>
-              <p className="">{member.role}</p>
-              <p className="bio-p">{member.bio}</p>
-              </div>
-            </div>
+            <motion.div
+              className="team-member"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4 }}
+                className="for-team"
+              >
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={400}
+                  height={250}
+                  quality={100}
+                  
+                />
+              </motion.div>
+
+              <motion.div
+                className="team-bio-data"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h3>{member.name}</h3>
+                <p className="role">{member.role}</p>
+                <p className="bio-p">{member.bio}</p>
+              </motion.div>
+            </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>

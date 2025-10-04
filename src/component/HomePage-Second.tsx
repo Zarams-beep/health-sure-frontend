@@ -10,7 +10,7 @@ export default function HomePageSecondSection() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true }}
     >
       <div className="container">
       {/* Header */}
@@ -18,7 +18,7 @@ export default function HomePageSecondSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.6 }}
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true }}
       >
         <h2>Thousand Steps Brought Closer</h2>
         <p>
@@ -66,7 +66,7 @@ export default function HomePageSecondSection() {
               duration: 0.6,
               ease: "easeOut",
             }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true }}
             /* Scale a bit on hover */
             whileHover={{ scale: 1.05 }}
           >

@@ -475,20 +475,23 @@
   @apply w-full md:w-[800px] font-alt;
 }
 .about-team .team-member {
-  @apply flex items-center gap-[3rem] lg:flex-row flex-col;
+  @apply flex items-center gap-[3rem] lg:flex-row flex-col  px-[7rem] py-5;
 }
-.for-team-img {
-  @apply rounded-lg mb-4 w-full h-[250px] object-cover;
+.for-team {
+  @apply  p-10 h-[20rem] w-[25rem];
+}
+.for-team img{
+  @apply rounded-md h-full
 }
 .team-bio-data {
-  @apply flex flex-col items-center justify-center;
+  @apply flex flex-col items-center justify-center w-full;
 }
 .team-bio-data p {
   @apply mb-5 px-9 w-full font-alt;
 }
 .team-carousel .swiper-button-next,
 .team-carousel .swiper-button-prev {
-  @apply text-brown;
+  @apply text-brown text-[14px] md:text-[16px];
 }
 .team-carousel .swiper-pagination-bullet {
   @apply bg-milky;

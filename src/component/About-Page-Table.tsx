@@ -2,7 +2,7 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-
+import { motion } from "framer-motion";
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     fontWeight: "bold",
@@ -27,8 +27,14 @@ export default function AboutTableSection() {
   return (
     <section className="about-how-we-work container">
       <div>
+        <motion.header
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+      >
         <h2>How We Work</h2>
-        <p>Our health-saving model ensures full transparency and security:</p>
+        <p>Our health-saving model ensures full transparency and security:</p></motion.header>
         <Box sx={{ overflowX: "auto" }}>
           <TableContainer component={Paper}>
             <Table>

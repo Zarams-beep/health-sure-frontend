@@ -49,7 +49,7 @@ export default function MediaHeaderSection() {
       className="header-section"
       style={{ opacity: isSticky }}
       initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: isSticky }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container">

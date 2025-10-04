@@ -33,7 +33,7 @@ export default function HeaderSection() {
     <motion.header
       className="header-section"
       initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: isSticky }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       // style={{ opacity: isSticky }}
     >
