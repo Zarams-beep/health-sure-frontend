@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function HeaderSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSticky, setSticky] = useState(1);
+  //const [isSticky, setSticky] = useState(1);
   const [isOpen3, setIsOpen3] = useState(false);
 
   const handleOpen3 = () => setIsOpen3((prev) => !prev);
@@ -16,10 +16,9 @@ export default function HeaderSection() {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
+/*  useEffect(() => {
     if (typeof window === "undefined") return;
-
-    const handleScroll = () => {
+ const handleScroll = () => {
       const scrollTop = window.scrollY;
       const maxScroll = 100;
       setSticky(Math.max(1 - scrollTop / maxScroll, 0.6));
@@ -27,7 +26,7 @@ export default function HeaderSection() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, []); */
 
   return (
     <motion.header
