@@ -12,7 +12,7 @@ export default function MediaHeaderSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
-  const [isSticky, setSticky] = useState(1);
+//  const [isSticky, setSticky] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export default function MediaHeaderSection() {
   }, []);
 
   // Sticky opacity + outside click
-  useEffect(() => {
+/*  useEffect(() => {
     const handleScroll = () =>
       setSticky(Math.max(1 - window.scrollY / 100, 0.6));
 
@@ -42,12 +42,12 @@ export default function MediaHeaderSection() {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, []); */
 
   return (
     <motion.header
       className="header-section"
-      style={{ opacity: isSticky }}
+    //  style={{ opacity: isSticky }}
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
