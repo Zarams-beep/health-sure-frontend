@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -38,30 +38,35 @@ const Login: React.FC = () => {
   const allFieldsFilled = email && password;
 
   const onSubmit = async (data: LoginFormData) => {
-    setIsLoading(true);    
-    
+    setIsLoading(true);
+
     try {
-      const response = await fetch("https://health-sure-backend.onrender.com/auth/log-in", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include', 
-        body: JSON.stringify(data)
-      });
-  
+      const response = await fetch(
+        "https://health-sure-backend.onrender.com/auth/log-in",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(data),
+        }
+      );
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Login failed");
       }
-  
+
       const result = await response.json();
-      dispatch(setUserData({
-        fullName: result.user.fullName,
-        image: result.user.image,
-        email: result.user.email,
-      token:result.token,
-      id: result.user.id,
-      }));      
-  
+      dispatch(
+        setUserData({
+          fullName: result.user.fullName,
+          image: result.user.image,
+          email: result.user.email,
+          token: result.token,
+          id: result.user.id,
+        })
+      );
+
       router.push(`/dashboard/${result.user.id}/landing-page`);
     } catch (error) {
       alert(error instanceof Error ? error.message : "Login failed");
@@ -70,7 +75,6 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="login-container">
@@ -97,14 +101,13 @@ const Login: React.FC = () => {
         </div>
 
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-
-        {/* email */}
+          {/* email */}
           <div className="input-group">
             <label htmlFor="email" className="input-label">
               Email
             </label>
             <div className="input-wrapper">
-            <span className="input-icon">
+              <span className="input-icon">
                 <CiMail
                   color={errors.email ? "#f65252" : "#59676e"}
                   size={18}
@@ -133,42 +136,42 @@ const Login: React.FC = () => {
               Choose Password
             </label>
             <div className="input-wrapper">
-            <span className="input-icon">
+              <span className="input-icon">
                 <CiLock
                   color={errors.password ? "#f65252" : "#59676e"}
                   size={18}
                 />
               </span>
-             
+
               <div className="input-second">
-              <input
-                className={`input-field ${
-                  errors.password ? "input-error" : "input-normal"
-                }`}
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Enter your password"
-                required
-                {...register("password")}
-              />
-             <button
-                type="button"
-                className="show-password-toggle"
-                onClick={handleShowPassword}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? (
-                  <FaEyeSlash
-                    color={errors.password ? "#f65252" : "#59676e"}
-                    size={18}
-                  />
-                ) : (
-                  <FaEye
-                    color={errors.password ? "#f65252" : "#59676e"}
-                    size={18}
-                  />
-                )}
-              </button>
+                <input
+                  className={`input-field ${
+                    errors.password ? "input-error" : "input-normal"
+                  }`}
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  className="show-password-toggle"
+                  onClick={handleShowPassword}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash
+                      color={errors.password ? "#f65252" : "#59676e"}
+                      size={18}
+                    />
+                  ) : (
+                    <FaEye
+                      color={errors.password ? "#f65252" : "#59676e"}
+                      size={18}
+                    />
+                  )}
+                </button>
               </div>
             </div>
             {errors.password && (
@@ -180,18 +183,8 @@ const Login: React.FC = () => {
           </div>
 
           <Link href={"/auth/forgot-password"} className="forgot-password-link">
-              Forgot password
-            </Link>
-
-            <button className="oauth-btn btn-google" onClick={() => window.location.href = 'https://health-sure-backend.onrender.com/auth/google'}>
-              <FcGoogle/>
-  Login with Google
-</button>
-
-<button className="oauth-btn btn-github" onClick={() => window.location.href = 'https://health-sure-backend.onrender.com/auth/github'}>
-  <GrGithub/>
-  Login with GitHub
-</button>
+            Forgot password
+          </Link>
 
 
           <button
