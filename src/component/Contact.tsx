@@ -52,8 +52,8 @@ export default function ContactUsForm() {
     try {
       // 🔑 Send via EmailJS
       const result = await emailjs.send(
-        process.env.NEXT_EMAILJS_SERVICE_ID!, // Service ID
-        process.env.NEXT_EMAILJS_TEMPLATE_ID!, // Template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, // Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, // Template ID
         {
           name: `${data.firstName} ${data.lastName}`,
           email: data.email,
@@ -61,7 +61,7 @@ export default function ContactUsForm() {
           title: data.subject,
           message: data.message,
         },
-        process.env.NEXT_EMAILJS_KEY! // Public Key
+        process.env.NEXT_PUBLIC_EMAILJS_KEY! // Public Key
       );
 
       console.log("EmailJS result:", result.text);
