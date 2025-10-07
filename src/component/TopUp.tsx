@@ -21,7 +21,6 @@ export default function PayViaCardSection() {
 //   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onSubmit = (data: PayViaCard) => {
-    console.log("Payment Details:", data);
     setIsModalOpen(true);
   };
 

@@ -71,7 +71,6 @@ export default function BasicInfoEditSection({ onNext }: Props) {
   
   const onSubmit = async (data: BasicInfo) => {
     setIsLoading(true);
-    console.log(userId);
    
     try {
       const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/basic-info `, {

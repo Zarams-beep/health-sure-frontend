@@ -61,7 +61,6 @@ export default function TreatmentInfoView() {
   
           const data = await response.json();
           const backendData = data.data || data;
-          console.log("Backend data:", backendData);
   
           if (!backendData) {
             throw new Error("Incomplete treatment info from server.");

@@ -67,7 +67,6 @@ export default function MeetDoctor() {
         return;
       }
       setLoading(true);
-      console.log("Form submitted:", data);
   
       // Simulate an async submission
       setTimeout(() => {

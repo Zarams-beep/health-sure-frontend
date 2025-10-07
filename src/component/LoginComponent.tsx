@@ -54,8 +54,6 @@ const Login: React.FC = () => {
       }
   
       const result = await response.json();
-      // console.log(`log in ${result.user.id}`);
-      // console.log(`token here ${result.token}`);
       dispatch(setUserData({
         fullName: result.user.fullName,
         image: result.user.image,
