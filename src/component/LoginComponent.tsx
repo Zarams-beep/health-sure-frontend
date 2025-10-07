@@ -12,8 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "@/types/auth";
 import { loginSchema } from "@/features/LoginSchema";
 import { useRouter } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
-import { GrGithub } from "react-icons/gr";
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
