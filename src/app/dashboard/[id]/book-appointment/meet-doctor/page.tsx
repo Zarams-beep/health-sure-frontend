@@ -81,17 +81,6 @@ export default function MeetDoctor() {
   return (
     <>
     <div className="dashboard-meet-doctor">
-      <div className="dashboard-meet-doctor-small">
-        <div className="dashboard-meet-doctor-img-container">
-          <Image
-            src="/img-8.jpg"
-            alt="meet doctor"
-            width={400}
-            height={250}
-            quality={100}
-          />
-        </div>
-      </div>
 
       <div className="dashboard-meet-doctor-form-area">
        <div className="form-area-2">
