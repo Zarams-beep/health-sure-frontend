@@ -1,6 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage
+import storage from 'redux-persist/lib/storage'; 
+import { PersistPartial } from 'redux-persist/es/persistReducer'; 
+
 import authReducer from './slices/authSlices';
 import sidebarReducer from './slices/sideBarSlices';
 import basicInfoReducer from "./slices/basicInfo";
@@ -26,7 +28,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['sidebar','auth'],// Add other reducers here if you want to persist them
+  whitelist: ['sidebar', 'auth'],
 };
 
 // Create persisted reducer
@@ -37,13 +39,16 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Disable for redux-persist compatibility
+      serializableCheck: false,
     }),
 });
 
 // Create persistor
 const persistor = persistStore(store);
+
 export { store, persistor };
+
+// ✅ Type exports
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
+export type PersistedRootState = RootState & PersistPartial;
