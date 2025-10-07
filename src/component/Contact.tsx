@@ -63,6 +63,8 @@ export default function ContactUsForm() {
         },
         process.env.NEXT_PUBLIC_EMAILJS_KEY! // Public Key
       );
+
+      console.log("EmailJS result:", result.text);
       setSuccessMessage("Message sent successfully ✅");
       reset(); // clear form so user can type a new one
     } catch (error: unknown) {
