@@ -8,7 +8,7 @@ import { IoSettings } from "react-icons/io5";
 import { IoIosLogOut, IoIosSearch } from "react-icons/io";
 import { setUserData } from "@/store/slices/authSlices"; // your Redux action
 import { useRouter } from "next/navigation";
-
+import { persistor } from "@/store/store";
 export default function DashboardNavBarPage() {
   const [notificationClick, setNotification] = useState(false);
   const { fullName, image, token } = useSelector((state: RootState) => state.auth);
@@ -41,6 +41,8 @@ export default function DashboardNavBarPage() {
         }
       }
 
+       await persistor.purge();
+       
       // Clear Redux state
       dispatch(setUserData({ fullName: "", email: "", image: "", token: "", id: "" }));
 
