@@ -1401,3 +1401,36 @@
   @apply bg-brown text-white-offWhite capitalize text-[14px]
 }
 /* appointment history styling ends */
+
+/*chat styling starts */
+.chat-container{
+  @apply p-3 rounded-2xl my-2 max-w-[85%] whitespace-pre-wrap
+}
+.chat-container.chat-container-user{
+  @apply bg-brown text-lightGrey self-end ml-auto
+}
+.chat-container.chat-container-not-user{
+  @apply bg-lightGrey text-brown
+}
+.chat-code-container{
+  @apply bg-brown-light px-1 py-0.5 rounded text-sm font-mono
+}
+.chat-page-container{
+  @apply flex flex-col h-screen bg-white-offWhite text-brown p-4
+}
+.sub-chat-page-container{
+  @apply flex-1 overflow-y-auto space-y-3
+}
+.thinking-container{
+  @apply text-lightGrey italic animate-pulse
+}
+.chat-input-container{
+  @apply flex items-center gap-2 mt-4
+}
+.chat-input-container input{
+  @apply flex-1 px-3 py-2 bg-brown text-white-offWhite rounded-lg outline-none
+}
+.chat-input-container button{
+  @apply p-2 bg-brown text-white-offWhite rounded-lg hover:bg-brown-light transition
+}
+/*chat styling ends */
