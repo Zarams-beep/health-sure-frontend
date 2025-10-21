@@ -19,7 +19,7 @@ export default function ChatPage() {
     setQuestion("");
 
     try {
-      const res = await fetch("http://localhost:3000/chat", {
+      const res = await fetch("https://health-sure-backend.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userInput }),
