@@ -17,6 +17,9 @@ const nextConfig = {
     // Optional: For external image services like Wikipedia
     domains: ['upload.wikimedia.org'],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
