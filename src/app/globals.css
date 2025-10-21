@@ -1422,7 +1422,7 @@
   @apply flex-1 overflow-y-auto space-y-3
 }
 .thinking-container{
-  @apply text-lightGrey italic animate-pulse
+  @apply text-brown italic animate-pulse
 }
 .chat-input-container{
   @apply flex items-center gap-2 mt-4
