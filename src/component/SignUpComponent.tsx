@@ -52,7 +52,7 @@ const SignUp: React.FC = () => {
         formData.append("image", uploadedImage);
       }
 
-      const response = await fetch("https://health-sure-backend.onrender.com/auth/sign-up", {
+      const response = await fetch("https://health-sure-backend.onrender.com/auth/register", {
         method: "POST",
         body: formData,
       });
