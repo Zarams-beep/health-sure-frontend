@@ -8,15 +8,11 @@ import { RiMentalHealthFill, RiInformationLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSubmitFormData } from "@/types/auth";
-// import { SignUpFormData } from "@/types/auth";
 import { signUpSchema } from "@/features/SignUpSchema";
 import { useRouter } from "next/navigation";
-// import { useDispatch } from "react-redux";
-// import { setUserData } from "@/store/slices/authSlices";
 import ImageUploader from "./imgComponent";
 const SignUp: React.FC = () => {
   const router = useRouter();
-  // const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
