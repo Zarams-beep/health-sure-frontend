@@ -85,13 +85,6 @@ const SignUp: React.FC = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // ------ changing button color dependent on form validation ------
-  // const fullName = watch("fullName");
-  // const email = watch("email");
-  // const password = watch("password");
-  // const confirmPassword = watch("confirmPassword");
-  // const allFieldsFilled =fullName && email && password && confirmPassword;
-
   return (
     <>
       <div className="login-container signup-container">
