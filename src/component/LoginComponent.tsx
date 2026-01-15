@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const {
@@ -38,15 +40,19 @@ const Login: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-
+    setError("");
+    setSuccess("");
     try {
       const response = await fetch(
         "https://health-sure-backend.onrender.com/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
+      credentials: "include", 
         }
       );
 
@@ -65,10 +71,10 @@ const Login: React.FC = () => {
           id: result.user.id,
         })
       );
-
+setSuccess("Login successful! Redirecting to dashboard...");
       router.push(`/dashboard/${result.user.id}/landing-page`);
-    } catch (error) {
-      alert(error instanceof Error ? error.message : "Login failed");
+    } catch (err:any) {
+       setError(err.message || "Something went wrong. Please try again.");
       console.error("Login error:", error);
     } finally {
       setIsLoading(false);
@@ -97,6 +103,13 @@ const Login: React.FC = () => {
               Sign Up
             </Link>
           </p>
+           {error && (
+              <span className="text-red-700">{error}</span>
+          )}
+
+          {success && (
+              <span className="text-green-700">{success}</span>
+          )}
         </div>
 
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
