@@ -64,15 +64,15 @@ const Login: React.FC = () => {
       const result = await response.json();
       dispatch(
         setUserData({
-          fullName: result.user.fullName,
-          image: result.user.image,
-          email: result.user.email,
+          fullName: result.data.fullName,
+          image: result.data.image,
+          email: result.data.email,
           token: result.token,
-          id: result.user.id,
+          id: result.data.id,
         })
       );
 setSuccess("Login successful! Redirecting to dashboard...");
-      router.push(`/dashboard/${result.user.id}/landing-page`);
+      router.push(`/dashboard/${result.data.id}/landing-page`);
     } catch (err:any) {
        setError(err.message || "Something went wrong. Please try again.");
       console.error("Login error:", error);
@@ -194,7 +194,7 @@ setSuccess("Login successful! Redirecting to dashboard...");
             )}
           </div>
 
-          <Link href={"/auth/forgot-password"} className="forgot-password-link">
+          <Link href={"/auth/send-opt"} className="forgot-password-link">
             Forgot password
           </Link>
 
