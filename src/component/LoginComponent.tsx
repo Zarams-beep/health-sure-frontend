@@ -194,7 +194,7 @@ setSuccess("Login successful! Redirecting to dashboard...");
             )}
           </div>
 
-          <Link href={"/auth/send-opt"} className="forgot-password-link">
+          <Link href={"/auth/send-otp"} className="forgot-password-link">
             Forgot password
           </Link>
 
