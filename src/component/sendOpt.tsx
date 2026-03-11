@@ -25,7 +25,7 @@ export default function SendOTP() {
     setSuccess("");
 
     try {
-      const response = await fetch("https://health-sure-backend.onrender.com/auth/send-otp",
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/send-otp`,
        {
         method: "POST",
         headers: {
@@ -43,11 +43,9 @@ export default function SendOTP() {
       setSuccess("OTP sent successfully! Check your email.");
       reset();
 
-      // Optional: Redirect to OTP verification page after 2 seconds
+      // Redirect to login after OTP is sent
       setTimeout(() => {
-        window.location.href = `/verify-otp?email=${encodeURIComponent(
-          data.email
-        )}`;
+        window.location.href = `/auth/log-in`;
       }, 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

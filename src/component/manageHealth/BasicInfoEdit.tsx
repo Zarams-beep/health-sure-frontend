@@ -73,7 +73,7 @@ export default function BasicInfoEditSection({ onNext }: Props) {
     setIsLoading(true);
    
     try {
-      const response = await fetch(`https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/basic-info `, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/dashboard/${userId}/manage-health/basic-info`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -27,6 +27,8 @@ const SignUp: React.FC = () => {
     mode: "onChange",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
@@ -48,7 +50,7 @@ const SignUp: React.FC = () => {
         formData.append("image", uploadedImage);
       }
 
-      const response = await fetch("https://health-sure-backend.onrender.com/auth/register", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
         method: "POST",
         body: formData,
       });
@@ -56,17 +58,18 @@ const SignUp: React.FC = () => {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Signup failed");
+        // Backend sends { success: false, error: "..." }
+        throw new Error(result.error || result.message || "Signup failed");
       }
+      setSuccess("Account created! Redirecting to login...");
       setTimeout(() => {
-        alert("Signup successful!");
         router.push("/auth/log-in");
-      }, 100);
+      }, 1500);
     } catch (error) {
       const errMsg =
         error instanceof Error ? error.message : "An unknown error occurred";
       console.error("Signup error:", errMsg);
-      alert(errMsg);
+      setError(errMsg);
     } finally {
       setIsLoading(false);
     }
@@ -102,10 +105,12 @@ const SignUp: React.FC = () => {
             <h2 className="form-title">Create an account</h2>
             <p className="form-subtitle">
               Already have an account?&nbsp;&nbsp;
-              <Link href={"/auth/log-in"} className="">
+              <Link href={"/auth/log-in"} className="linking-auth">
                 Login
               </Link>
             </p>
+            {error && <span className="error-text">{error}</span>}
+            {success && <span className="success-text">{success}</span>}
           </div>
           {/* -------- form details and input -------- */}
           <form

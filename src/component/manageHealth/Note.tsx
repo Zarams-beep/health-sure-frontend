@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { Notes } from "@/types/note";
 import { setNotes } from "@/store/slices/notes";
@@ -9,142 +10,67 @@ import { CircularProgress } from "@mui/material";
 
 export default function NoteView() {
   const dispatch = useDispatch();
-
-  const storedNotes = useSelector((state: RootState) => state.notes) || {
-    doctorNotes: [],
-    caregiverComments: [],
-  };
-
-  const { id: userId, token } = useSelector((state: RootState) => state.auth);
-
-  const [noteDetails, setNoteDetails] = useState<Notes>({
-    doctorNotes: [],
-    caregiverComments: [],
-  });
-
+  const storedNotes = useSelector((state: RootState) => state.notes);
+  const { token, userId } = useAuth();
+  const [noteDetails, setNoteDetails] = useState<Notes | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchNoteDetails = async () => {
+    if (!token || !userId) return;
+    const fetchNotes = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        if (
-          storedNotes?.doctorNotes?.length > 0 ||
-          storedNotes?.caregiverComments?.length > 0
-        ) {
+        if (storedNotes?.doctorNotes?.length > 0 || storedNotes?.caregiverComments?.length > 0) {
           setNoteDetails(storedNotes);
-          setLoading(false);
           return;
         }
-
         const response = await fetch(
-          `https://health-sure-backend.onrender.com/dashboard/${userId}/manage-health/notes`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
+          `${process.env.NEXT_PUBLIC_API_URL}/dashboard/${userId}/manage-health/notes`,
+          { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
         );
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch note results: ${response.status}`);
-        }
-
+        if (response.status === 401 || response.status === 404) { setNoteDetails(null); return; }
+        if (!response.ok) throw new Error(`Failed to fetch notes: ${response.status}`);
         const data = await response.json();
         const backendData = data.data || data;
-
-        if (
-          !backendData.doctorNotes ||
-          !backendData.caregiverComments
-        ) {
-          throw new Error("Invalid data structure from server");
-        }
-
         dispatch(setNotes(backendData));
         setNoteDetails(backendData);
       } catch (err) {
-        console.error("Error fetching note info:", err);
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
         setLoading(false);
       }
     };
+    fetchNotes();
+  }, [token, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    fetchNoteDetails();
-  }, [userId, token, dispatch, storedNotes]);
+  if (loading) return <div className="loading-container"><CircularProgress size={28} /><p>Loading notes...</p></div>;
+  if (error) return <div className="error-container"><p>Error: {error}</p><button onClick={() => setError(null)}>Retry</button></div>;
 
-  const isInfoAvailable = Object.values(noteDetails).some(
-    (value) => value.length > 0
-  );
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <CircularProgress />
-        <p>Loading note info...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="error-container">
-        <p>Error: {error}</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
-      </div>
-    );
-  }
+  const isInfoAvailable = noteDetails && (noteDetails.doctorNotes?.length > 0 || noteDetails.caregiverComments?.length > 0);
 
   return (
     <div className="health-status-container">
       {isInfoAvailable ? (
         <div className="health-status-container treatment-flex-info">
-
-          {/* Doctor Notes Section */}
-          {noteDetails.doctorNotes.length > 0 && (
+          {noteDetails!.doctorNotes?.length > 0 && (
             <div className="small-treatment-flex">
               <h3>DOCTOR&apos;S NOTES</h3>
-              <ul>
-                {noteDetails.doctorNotes.map((note, index) => (
-                  <li key={index} className="note-item">
-                   <div className="info-item">
-                    <h4>Doctor Notes:</h4>
-                    <p> {note}</p>
-                   </div>
-                  </li>
-                ))}
-              </ul>
+              <ul>{noteDetails!.doctorNotes.map((note, i) => <li key={i}><div className="info-item"><h4>Note:</h4><p>{note}</p></div></li>)}</ul>
             </div>
           )}
-
-          {/* Caregiver Comments Section */}
-          {noteDetails.caregiverComments.length > 0 && (
+          {noteDetails!.caregiverComments?.length > 0 && (
             <div className="small-treatment-flex">
               <h3>CAREGIVER COMMENTS</h3>
-              <ul>
-                {noteDetails.caregiverComments.map((comment, index) => (
-                  <li key={index} className="comment-item">
-                  <div className="info-item">
-                  <h4>comment:</h4>
-                  <p> {comment}</p>
-                  </div>
-                  </li>
-                ))}
-              </ul>
+              <ul>{noteDetails!.caregiverComments.map((comment, i) => <li key={i}><div className="info-item"><h4>Comment:</h4><p>{comment}</p></div></li>)}</ul>
             </div>
           )}
         </div>
       ) : (
         <div className="missing-info">
           <p>No notes have been added yet.</p>
-          <Link
-            href={`/dashboard/${userId}/manage-health/edit-health`}
-            className="info-link"
-          >
-            Click here to add notes
-          </Link>
+          <Link href={`/dashboard/${userId}/manage-health/edit-health`} className="info-link">Click here to add notes</Link>
         </div>
       )}
     </div>

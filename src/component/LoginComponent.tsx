@@ -44,7 +44,7 @@ const Login: React.FC = () => {
     setSuccess("");
     try {
       const response = await fetch(
-        "https://health-sure-backend.onrender.com/auth/login",
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,10 +58,12 @@ const Login: React.FC = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
+        // Backend sends { success: false, error: "..." }
+        throw new Error(errorData.error || errorData.message || "Login failed");
       }
 
       const result = await response.json();
+      // ✅ Fixed: token is at result.token, user data at result.data
       dispatch(
         setUserData({
           fullName: result.data.fullName,
@@ -103,13 +105,8 @@ setSuccess("Login successful! Redirecting to dashboard...");
               Sign Up
             </Link>
           </p>
-           {error && (
-              <span className="text-red-700">{error}</span>
-          )}
-
-          {success && (
-              <span className="text-green-700">{success}</span>
-          )}
+           {error && <span className="error-text">{error}</span>}
+          {success && <span className="success-text">{success}</span>}
         </div>
 
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>

@@ -11,24 +11,29 @@ import { useRouter } from "next/navigation";
 import { persistor } from "@/store/store";
 export default function DashboardNavBarPage() {
   const [notificationClick, setNotification] = useState(false);
-  const { fullName, image, token } = useSelector((state: RootState) => state.auth);
+  const { fullName, image, token, id: userId } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const displayName = fullName || "Guest";
   const profileImage = image 
-    ? `https://health-sure-backend.onrender.com${image}` 
+    ? `${process.env.NEXT_PUBLIC_API_URL}${image}` 
     : "/img-5.jpg";
 
   const handleNotificationClick = () => {
     setNotification((prev) => !prev);
+    router.push(`/dashboard/${userId}/notifications`);
+  };
+
+  const handleSettingsClick = () => {
+    router.push(`/dashboard/${userId}/settings`);
   };
 
   const handleLogout = async () => {
     try {
       // Call backend to blacklist token
       if (token) {
-        const response = await fetch("https://health-sure-backend.onrender.com/auth/logout", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +49,7 @@ export default function DashboardNavBarPage() {
        await persistor.purge();
        
       // Clear Redux state
-      dispatch(setUserData({ fullName: "", email: "", image: "", token: "", id: "" }));
+      dispatch(setUserData({ fullName: "", email: "", image: null, token: "", id: "" }));
 
       // Optionally clear localStorage
       localStorage.removeItem("token");
@@ -94,7 +99,7 @@ export default function DashboardNavBarPage() {
             <button className="icon-btn" onClick={handleNotificationClick}>
               {notificationClick ? <IoMdNotifications /> : <IoMdNotificationsOff />}
             </button>
-            <button className="icon-btn">
+            <button className="icon-btn" onClick={handleSettingsClick}>
               <IoSettings />
             </button>
             <button className="icon-btn" onClick={handleLogout}>
