@@ -5,8 +5,8 @@
    top: 0;
    bottom: 0;
    height: 100vh;
-    background-color: #CBB590;
-    color: #372D25;
+    background-color: var(--color-primary-dark);
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     padding: 1.2rem;
