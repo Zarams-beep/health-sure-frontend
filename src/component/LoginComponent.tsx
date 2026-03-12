@@ -63,7 +63,8 @@ const Login: React.FC = () => {
       }
 
       const result = await response.json();
-      // ✅ Fixed: token is at result.token, user data at result.data
+
+      // Dispatch Redux state update
       dispatch(
         setUserData({
           fullName: result.data.fullName,
@@ -73,7 +74,13 @@ const Login: React.FC = () => {
           id: result.data.id,
         })
       );
-setSuccess("Login successful! Redirecting to dashboard...");
+
+      setSuccess("Login successful! Redirecting...");
+
+      // Wait for redux-persist to finish writing to localStorage
+      // before navigating — fixes production redirect bug on Vercel
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
       router.push(`/dashboard/${result.data.id}/landing-page`);
     } catch (err:any) {
        setError(err.message || "Something went wrong. Please try again.");

@@ -2,20 +2,29 @@
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const DashboardGuard = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { token } = useSelector((state: RootState) => state.auth);
+  const [hydrated, setHydrated] = useState(false);
+
+  // Wait one tick for redux-persist to rehydrate from localStorage
+  // before making any redirect decisions — fixes production race condition
+  useEffect(() => {
+    const timer = setTimeout(() => setHydrated(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
-    if (!token) {
-      // If no token, redirect to login
+    if (hydrated && !token) {
       router.replace("/auth/log-in");
     }
-  }, [token, router]);
+  }, [hydrated, token, router]);
 
-  // If token exists, render the dashboard
+  // Don't render anything until we know the auth state
+  if (!hydrated) return null;
+
   return <>{token && children}</>;
 };
 
